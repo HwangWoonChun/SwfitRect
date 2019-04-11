@@ -88,14 +88,53 @@ func 함수이름(매개변수 : 매개변수타입,......) -> 리턴(생략가�
 //전달인자레이블 선언
 func 함수이름(전달인자레이블 매개변수 : 매개변수타입,......) -> 리턴(생략가능) {
 }
+
 //전달인자레이블 사용
 함수이름(레이블:매개변수)
 </code></pre>
-}
 3. 가변매개변수 : friends를 배열 형태로 받을 수 있다. 함수당 하나 사용 가능
 <pre><code>
 func getFreinds(friends : String...) -> void {
 }
 </code></pre>
+**4. 스위프트의 함수 : 스위프트는 함수형프로그래밍 패러다임을 가지고있다. 스위프트의 함수는 일급객채로서 매개변수와 리턴 값으로 활용 할 수 있다.**
+<pre><code>
+func sayHello(to me : String, from frined : String){
+    print("\(me) \(frined)")
 }
 
+//함수를 객채화
+var variableFunc : ((String, String)->Void) = sayHello(to:from:)
+variableFunc("a","b")
+
+//함수를 매개변수화
+func sayHello2(function : ((String, String)->Void)) -> Void{
+    function("a","b")
+}
+sayHello2(function: variableFunc)
+</code></pre>
+
+7강 조건문
+===========
+1. if else, switch case
+> 1. if else : 중괄호 생략 불가능
+> 2. switch case : 브레이크를 명시적으로 사용하지 않아도 브레이크문에 걸려 조건에 만족하면 빠져나온다. 하지만 fallthrough 를 사용하면 조건 성공시 다음 케이스문 실행된다.
+<pre><code>
+var someInteger = 3
+
+switch someInteger {
+case 0:
+    print("0")
+case 1..<2: //범위연산자
+    print("1이상 100미만")//기본적으로 fallthrough 를 따른다. 케이스문이 자동으로 다음번 케이스문으로 진행
+case 2...3: // 범위연산자
+    print("2이상 3이하")
+    fallthrough
+case 4:
+    print("4")
+case 5:
+    print("5")
+default:
+    print("defalut")
+}
+</code></pre>
