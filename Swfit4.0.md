@@ -15,9 +15,9 @@ Swfit 4.0 Recture
 2강 상수와 변수
 ===========
 1. 상수
-<pre><code>
+<code>
 let a : type = value
-</code></pre>
+</code>
 2. 변수
 <pre><code>
 var a : type = value
