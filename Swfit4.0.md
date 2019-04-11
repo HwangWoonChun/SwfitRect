@@ -75,3 +75,27 @@ let sortedUnion = union.sorted() // 합집합 정렬 : 1,2,3,4
 let intersection = set.intersection(set2) //교집합 : 3,2
 let subtract = set.subtracting(set2) // 차집합 : 1
 </code></pre>
+
+6강 함수
+===========
+1. 함수
+<pre><code>
+func 함수이름(매개변수 : 매개변수타입,......) -> 리턴(생략가능) {
+}
+</code></pre>
+2. 전달 인자 레이블 : 매개변수의 역할을 좀더 명확하게 하거나, 함수 사용자를 위한 배려
+<pre><code>
+//전달인자레이블 선언
+func 함수이름(전달인자레이블 매개변수 : 매개변수타입,......) -> 리턴(생략가능) {
+}
+//전달인자레이블 사용
+함수이름(레이블:매개변수)
+</code></pre>
+}
+3. 가변매개변수 : friends를 배열 형태로 받을 수 있다. 함수당 하나 사용 가능
+<pre><code>
+func getFreinds(friends : String...) -> void {
+}
+</code></pre>
+}
+
