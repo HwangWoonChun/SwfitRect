@@ -17,7 +17,7 @@ Swfit 4.0 Recture
 1. 상수
 <pre><code>
 let a : type = value
-</code><
+</code></pre>
 2. 변수
 <pre><code>
 var a : type = value
