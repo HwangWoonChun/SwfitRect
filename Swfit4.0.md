@@ -56,3 +56,22 @@ var strings     : [String] = [String]()
 var characters  : [Character] = []
 var array       = [1,2,3]
 </code></pre>
+> 2. 딕셔너리 초기화
+<pre><code>
+var dict    : Dictionary<String,Any> = Dictionary<String,Any>()
+var dict2   : Dictionary<String,Any> = [String:Any]()
+var dict3   : [String:Any] = [:]
+</code></pre>
+> 3. 셋 초기화 및 사용법
+<pre><code>
+var set     : Set<Int> = Set<Int>()
+var set2    : Set<Int> = []
+
+set  = [1,2,3]
+set2 = [2,3,4]
+
+let union = set.union(set2) // 합집합 : 1,4,2,3
+let sortedUnion = union.sorted() // 합집합 정렬 : 1,2,3,4
+let intersection = set.intersection(set2) //교집합 : 3,2
+let subtract = set.subtracting(set2) // 차집합 : 1
+</code></pre>
