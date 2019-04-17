@@ -181,3 +181,34 @@ default:
 > 7. 옵셔널의 사용 : ?, ! 키워드를 사용
 >> * ? : 일반적인 옵셔널 / 값이 있을수도있고 없을수도 있음을 표현 / 기존 변수처럼 사용, 연산 불가능 / nil 할당 가능
 >> * ! : 암시적 추출 옵셔널 / 기존 변수처럼 사용가능 / 닐 할당 가능하나 이후 접근시 에러
+    
+10강 구조체
+===========
+1. 구조체 : 스위프트의 대부분의 타입은 구조체로 이루어져있음, 타입을 정하기 때문에 대문자 카멜 케이스
+<pre><code>
+struct Sample {
+    //가변 프로퍼티
+    var varProperty : Int = 0
+    //불변 프로퍼티
+    let letPropergty : Int = 0
+    //타입 프로퍼티
+    static var typeProperty : Int = 0
+    //인스턴스 메소드
+    func instanceMethod(){
+    }
+    //타입 메소드
+    static func typeMethod(){
+    }
+}
+
+//사용
+var mutable : Sample = Sample()
+
+//타입 프로퍼트
+//타입 자체가 사용 할 수 있는 프로퍼티
+Sample.typeProperty = 100
+//그래서 아래는 error
+//mutable.typeProperty = 100
+//mutable.typeMethod()
+
+</pre></code>
