@@ -204,9 +204,29 @@ description(name: myName) // 컴파일 에러
 
 2. 옵셔널 바인딩 : 닐 체크함을 동시에 값을 꺼내오는 방법
 <pre><code>
-if let myNmae
-</pre></code>
+//옵셔널 바인딩의 기본적 사용방법
+func description(name : String){
+    print(name)
+}
 
+var myName : String? = ""
+
+if let bindingMyName = myName{
+    description(name: bindingMyName)
+}
+</pre></code>
+func description(name : String){
+    print(name)
+}
+<pre><code>
+//여러 데이터들을 바인딩 시 아래와 같이 사용한다, 변수가 하나라도 닐이라면 코드 실행 불가
+var myName  : String?   = ""
+var nilName : String?   = nil
+
+if let bindingMyName = myName, let bindingName2 = nilName{
+    description(name: bindingMyName)
+}
+</pre></code>
    
    
 11강 구조체
