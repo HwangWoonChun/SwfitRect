@@ -215,9 +215,6 @@ if let bindingMyName = myName{
     description(name: bindingMyName)
 }
 </pre></code>
-func description(name : String){
-    print(name)
-}
 <pre><code>
 //여러 데이터들을 바인딩 시 아래와 같이 사용한다, 변수가 하나라도 닐이라면 코드 실행 불가
 var myName  : String?   = ""
