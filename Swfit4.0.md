@@ -393,3 +393,31 @@ enum Alphabet : String{
 }
 Alphabet.a.description()
 </pre></code>
+
+14강 값 타입, 참조 타입 
+===========
+1. 클래스 : 단일 상속 / 메소드 및 프로퍼티(인스턴스/타입) / 참조타입 / 애플 프레임워크 큰 뼈대는 클래스로 구성 / 익스텐션 가능
+2. 구조체 : 상속 불가 / 메소드 및 프로퍼티(인스턴스/타입) / 값 타입 / 스위프트 대부분의 큰 뼈대는 구조체로 구성 / 익스텐션 가능
+3. 열거형 : 상속 불가 / 메소드 및 프로퍼티(인스턴스/타입) / 값 타입 / 익스텐션 가능
+4. 구조체 사용
+> 1. 연관된 몇몇의 값을 모아 하나의 데이터 타입으로 표현 하고 싶을때 사용(클래스와 동일)
+> 2. 다른 객체, 함수등으로 전달 될때 참조가 아닌 복사를 원할때
+> 3. 상속이 받거나 주는 필요가 없을 때
+5. 값 타입 : 데이터 전달 시 값을 복사하여 전달 하는 타입
+6. 참조타입 : 데이터 전달 시 값을 참조하여 메모리 위치를 전달 하는 타입
+<pre><code>
+struct SomeStruct {
+    var someProperty : String = "Property"
+}
+
+var someStructInstance : SomeStruct = SomeStruct()
+
+func someFunction (structInstace : SomeStruct){
+    var localVar : SomeStruct = structInstace
+    localVar.someProperty = "ABC"
+    print(localVar.someProperty) //ABC
+}
+
+someFunction(structInstace: someStructInstance)
+print(someStructInstance.someProperty) //Property
+</pre></code>
