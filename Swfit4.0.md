@@ -224,8 +224,16 @@ if let bindingMyName = myName, let bindingName2 = nilName{
     description(name: bindingMyName)
 }
 </pre></code>
-   
-   
+
+3. 옵셔널 강제추출 방식 : !로 강제 추출, 추출후 닐이 되어 데이터 다시 접근 시 에러
+<pre><code>
+var variable : String? = ""
+someFunction(name : variable!)
+variable = nil
+print(variable)  //warning 이 상태로 사용하게된다면 Optional(data) or nil 로 로그가 남게된다.
+print(variable!) //error
+</pre></code>
+
 11강 구조체
 ===========
 1. 구조체 : 스위프트의 대부분의 타입은 구조체로 이루어져있음, 타입을 정하기 때문에 대문자 카멜 케이스
