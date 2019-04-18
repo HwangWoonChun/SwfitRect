@@ -239,7 +239,20 @@ print(variable!) //error
 1. 구조체 : 스위프트의 대부분의 타입은 구조체로 이루어져있음, 타입을 정하기 때문에 대문자 카멜 케이스
 > 1. 구조체는 값 타입
 > 2. let : let 으로 정해진 구조체 변수는 가변 프로퍼티를 수정이 불가능
+<pre><code>
+struct Sample {
+    var varProperty : Int = 0
+}
+
+//사용
+let immutable : Sample = Sample()
+immutable.varProperty = 10 //error
+
+var mutable : Sample = Sample()
+mutable.varProperty = 20
+</pre></code>
 > 3. static : 구조체를 위한 타입 키워드, 타입프로퍼티/타입메소드
+> * 예제
 <pre><code>
 struct Sample {
     //가변 프로퍼티
