@@ -450,6 +450,7 @@ func calculate (a:Int, b: Int, function:((Int,Int)->Int)){
 }
 
 calculate(a: 10, b: 10, function: add)
+
 //변수로 만들지 않고 바로 사용
 calculate(a: 30, b: 10) { (left : Int, right : Int) -> Int in
     return left+right
