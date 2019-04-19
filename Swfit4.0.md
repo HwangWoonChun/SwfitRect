@@ -425,15 +425,13 @@ print(someStructInstance.someProperty) //Property
 15강 클로져 
 ===========
 1. 코드의 블럭으로 표현한 함수
-
 2. 일급시민이기에 변수, 상수, 매개변수로 사용 할 수 있다.
-
 3. 기본 포맷
 <pre><code>
 {(매개변수 목록)->반환 타입 in
     print(arg1)
 }
-</pre><code>
+</pre></code>
 
 4. 변수로 사용되는 클로져
 <pre><code>
