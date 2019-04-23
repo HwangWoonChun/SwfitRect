@@ -512,7 +512,36 @@ calculate(a: 10, b: 20, function: {
 })
 </pre></code>
 
-16강 프로퍼티
+16강 Capturing Value
+===========
+1. Capturing Value : 클로저는 참조 타입으로 힘 메모리 안에 살고 있으며 자신이 끌어다 쓰고있는 값들도 모두 힙으로 끌고 온다. 클로저가 갭쳐 하고 있다는 말은 외부 변수를 자신이 살고 있는 힙 메모리에 끌고와서 가둬 놓는다는 것을 의미 이를 통해 힙 메모리 살고 있는 참조 타입으로서 클로저 자신이 참조하는 겂이 먼저 사라지는 것을 방지
+
+* 캡쳐 예제 : makeIncrement 함수 안에 incremeter 함수가 들어간 중첩함수, 이에 따라 runningTotal 값이 incremeter 함수에 의해 불려지면서 메모리에 잡혀있게 된다.
+<pre><code>
+func makeIncremeter(amount : Int) -> (()->Int){
+    var runningTotal = 0
+    func incremeter() -> Int {
+        runningTotal += amount
+        return runningTotal
+    }
+    return incremeter
+}
+
+let incremeterByTen = makeIncremeter(amount: 10)
+incremeterByTen() //10
+incremeterByTen() //20
+incremeterByTen() //30
+
+let incremeterBySeven = makeIncremeter(amount: 7)
+incremeterByTen() //7
+
+incremeterByTen() //40
+</pre></code>
+
+2. 
+
+
+17강 프로퍼티
 ===========
 1. 구조체, 클래스, 열거형 내부의 속성 값
 
@@ -604,7 +633,7 @@ money.dollor = 5
 print(money.won)
 </pre></code>
 
-17강 상속
+18강 상속
 ===========
 1. 프로토콜, 클래스에서 상속 가능
 
