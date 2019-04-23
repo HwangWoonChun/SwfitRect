@@ -514,7 +514,8 @@ calculate(a: 10, b: 20, function: {
 
 16강 Capturing Value
 ===========
-1. Capturing Value : 클로저는 참조 타입으로 힘 메모리 안에 살고 있으며 자신이 끌어다 쓰고있는 값들도 모두 힙으로 끌고 온다. 클로저가 갭쳐 하고 있다는 말은 외부 변수를 자신이 살고 있는 힙 메모리에 끌고와서 가둬 놓는다는 것을 의미 이를 통해 힙 메모리 살고 있는 참조 타입으로서 클로저 자신이 참조하는 겂이 먼저 사라지는 것을 방지
+1. Capturing Value : 함수나 클로져는 참조타입으로 어느 변수에 대입되고 그 변수를 또다시 다른 변수에 대입 시 복사본이 아닌 기존 원본 그대로 사용된다.
+자신이 참조하는 변수가 먼저 사라지지 않게 하기 위해 캡쳐해둔다.(자신을 참조하는 값들 모두 힙으로 끌고와 가둬 놓는다.)
 
 * 캡쳐 예제 : makeIncrement 함수 안에 incremeter 함수가 들어간 중첩함수, 이에 따라 runningTotal 값이 incremeter 함수에 의해 불려지면서 메모리에 잡혀있게 된다.
 <pre><code>
@@ -538,9 +539,82 @@ incremeterByTen() //7
 incremeterByTen() //40
 </pre></code>
 
-2. 
+2. 메모리 순환 문제 : 참조하고 있는 서로가 서로를 도망가지 못하게 했기 때문에 나중에 사용하지 않아도 둘 다 메모리에 계속 남아있는 메모리 순환 문제 발생
+
+3. Escaping Closure : 함수의 인자로 쓰인 클로저가 함수의 밖 변수나 Array 등에 저장 되는 경우
+
+* 200인 이유 : 그저클로져를 함수 밖으로 뺴기만 해서 클로져가 실행 되지 않는다.
+<pre><code>
+var completionHandlers : [()->Void] = []
+
+func escape(completionHandler : @escaping ()->Void) {
+    completionHandlers.append(completionHandler)
+}
+
+func nonEsaping(closure : () -> Void){
+    closure()
+}
 
 
+class someClass {
+    var x = 100
+    
+    func doSomething(){
+        nonEsaping {
+            x = 200
+        }
+        escape {
+            self.x = 100
+        }
+    }
+}
+
+let instance = someClass()
+instance.doSomething()
+print(instance.x) //200
+</pre></code>
+* Escape 함수를 실행 시키려면 배열에 저장되어있는 함수 접근 하면 된다.
+<pre><code>
+var completionHandlers : [()->Void] = []
+
+func escape(completionHandler : @escaping ()->Void) {
+    completionHandlers.append(completionHandler)
+}
+
+func nonEsaping(closure : () -> Void){
+    closure()
+}
+
+
+class someClass {
+    var x = 100
+    
+    func doSomething(){
+        nonEsaping {
+            x = 200
+        }
+        escape {
+            self.x = 100
+        }
+    }
+}
+
+let instance = someClass()
+instance.doSomething()
+completionHandlers[0]()
+print(instance.x) //200
+</pre></code>
+
+* 네트워크 예제
+</pre></code>
+func get(url: URL, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) {
+    var request: URLRequest = URLRequest(url: url)
+    
+    request.httpMethod = "GET"
+    request.addValue("application/json", forHTTPHeaderField: "Accept")
+    session.dataTask(with: request, completionHandler: completionHandler).resume()
+}
+</pre></code>
 17강 프로퍼티
 ===========
 1. 구조체, 클래스, 열거형 내부의 속성 값
