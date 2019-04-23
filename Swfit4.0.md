@@ -564,9 +564,8 @@ var student : Student = Student(koreanAge: 10)
 print(student.westernAge)
 print(student.koreanAge)
 </pre></code>
-7. 프로퍼티 감시자 willSet : 프로퍼티가 앞으로 바뀔 때 호출(newValue)
+7. 프로퍼티 감시자 : willSet(프로퍼티가 앞으로 바뀔 때 호출(newValue)), didSet(프로퍼티가 바뀐 뒤 호출(oldValue)) / 연산프로퍼티와 동시 
 
-8. 프로퍼티 감시자 didSet : 프로퍼티가 바뀐 뒤 호출(oldValue)
 <pre><code>
 struct Money {
     var currency : Double = 100
@@ -603,4 +602,46 @@ var money : Money = Money()
 money.currency = 10
 money.dollor = 5
 print(money.won)
+</pre></code>
+
+17강 상속
+===========
+1. 프로토콜, 클래스에서 상속 가능
+
+2. 클래스의 타입 메소드 : static(재정의 불가), class(재정의 가능), final class func(재정의 불가)
+
+3. 클래스의 인스턴스 메소드 : final(재정의 불가)
+<pre><code>
+class Person {
+    var name : String = ""
+    
+    func selfIntroduce (){
+        print(name)
+    }
+    //재정의 불가능 한 메소드
+    final func sayHello(){
+        
+    }
+    //재정의 불가한 타입 메소드
+    static func typeMethod(){
+    }
+    //재정의 불가한 타입 메소드
+    final class func finalClassMethod(){
+    
+    }
+    //재정의 가능한 타입 메소드
+    class func classMethod(){
+    }
+    
+}
+
+class Student : Person {
+    //재정의 가능
+    override func selfIntroduce(){
+    }
+    //
+    override class func classMethod(){
+    }
+    //final, static, final class 는 불가능
+}
 </pre></code>
