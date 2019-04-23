@@ -511,3 +511,96 @@ calculate(a: 10, b: 20, function: {
     $0 + $1
 })
 </pre></code>
+
+16강 프로퍼티
+===========
+1. 구조체, 클래스, 열거형 내부의 속성 값
+
+2. 열거형은 연산 프로퍼티만 구현 가능(var)
+
+3. 저장 프로퍼티
+
+4. 연산 프로퍼티 : get, set 을 통해 특정 연산을 위한 프로퍼티, 값을 셋팅 해주면 연산을 통해 할당
+
+5. 읽기 전용 프로퍼티
+
+6. newValue : get, set 키워드를 통해 게터/세터 함수 정의, 파라미터 값 생략시 newValue 사용
+<pre><code>
+struct Student {
+    
+    //인스턴스 저장 프로퍼티
+    var koreanAge : Int = 0
+    
+    //연산 프로퍼티
+    var westernAge : Int {
+        get {
+            return koreanAge - 1
+        }
+        set (value){
+            koreanAge = value + 1
+        }
+        //        //set 의 매개변수 생략 가능, newValue 라고 지정해줘야함
+        //        set{
+        //            koreanAge = newValue + 1
+        //        }
+    }
+    
+    //타입 저장 프로퍼티
+    static var typeDescription : String = "학생"
+    
+    //읽기 전용 프로퍼티
+    var studentIntroduce : String{
+        get {
+            return "studentIntroduce"
+        }
+    }
+    //get은 생략이 가능
+    var teacherIntroduce : String{
+        return "teacherIntroduce"
+    }
+}
+
+var student : Student = Student(koreanAge: 10)
+print(student.westernAge)
+print(student.koreanAge)
+</pre></code>
+7. 프로퍼티 감시자 willSet : 프로퍼티가 앞으로 바뀔 때 호출(newValue)
+
+8. 프로퍼티 감시자 didSet : 프로퍼티가 바뀐 뒤 호출(oldValue)
+<pre><code>
+struct Money {
+    var currency : Double = 100
+    {
+        willSet(newRate){
+            print("새로운 Rate :\(newRate)")
+        }
+        didSet(oldRate){
+            print("예전 Rate :\(oldRate)")
+        }
+    }
+    var dollor : Double = 100
+    {
+        willSet{
+            print("새로운 dollor :\(newValue)")
+        }
+        didSet{
+            print("예전 dollor :\(oldValue)")
+        }
+    }
+    //프로퍼티 감시자와 연산 프로퍼티 기능을 동시에 사용 불가
+    //프로퍼티 감시자는 변경될 프로퍼티를 위한 기능
+    var won : Double{
+        get{
+            return dollor * currency
+        }
+        set{
+            newValue / currency
+        }
+    }
+}
+
+var money : Money = Money()
+money.currency = 10
+money.dollor = 5
+print(money.won)
+</pre></code>
