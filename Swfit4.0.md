@@ -456,3 +456,58 @@ calculate(a: 30, b: 10) { (left : Int, right : Int) -> Int in
     return left+right
 }
 </pre></code>
+
+6. 클로져 축약 표현(후행 클로져)
+<pre><code>
+//후행 클로져 미사용
+func calculate(a:Int, b:Int, function:(Int,Int)->Int){
+    print(function(a,b))
+}
+
+calculate(a: 10, b: 20, function: {(left,right) -> Int in
+    return 10 + 20
+})
+</pre></code>
+<pre><code>
+//후행클로져 사용
+func calculate(a:Int, b:Int, function:(Int,Int)->Int){
+    print(function(a,b))
+}
+
+calculate(a: 10, b: 20) { (left, right) -> Int in
+    return left+right
+}
+</pre></code>
+
+7. 클로져 축약 표현(리턴 타입 클로져) : 컴파일러는 function 매개변수의 리턴타입을 알기때문에 축약이 가능
+<pre><code>
+func calculate(a:Int, b:Int, function:(Int,Int)->Int){
+    print(function(a,b))
+}
+
+calculate(a: 10, b: 20, function: {(left,right) in
+    return 10 + 20
+})
+</pre></code>
+
+8. 단축인자 이름 : 매개변수의 이름도 생략이 가능하다. In 키워드 미사용
+<pre><code>
+func calculate(a:Int, b:Int, function:(Int,Int)->Int){
+    print(function(a,b))
+}
+
+calculate(a: 10, b: 20, function: {
+    return $0 + $1
+})
+</pre></code>
+
+9. 암시적 반환 표현 : 리턴 키워드, In 키워드 미사용
+<pre><code>
+func calculate(a:Int, b:Int, function:(Int,Int)->Int){
+    print(function(a,b))
+}
+
+calculate(a: 10, b: 20, function: {
+    $0 + $1
+})
+</pre></code>
