@@ -748,3 +748,161 @@ class Student : Person {
     //final, static, final class 는 불가능
 }
 </pre></code>
+
+19강 인스턴스 생성과 소멸
+===========
+1. 프로퍼티 초기화 : 프로퍼티는 초기화 해줘야하지만 필요 없다면 옵셔널을 사용 한다. 꼭 사용해야할 프로퍼티라면 암시적추출 옵셔널을 사용한다.
+
+2. init / deinit : 초기화 동시 메모리에 할당 / 소멸
+
+3. convereince init : 입맛대로 초기화 하고 싶다면 사용
+<pre><code>
+class Person {
+    var name = ""
+    var age  = 10
+    
+    init(name : String, age : Int) {
+        self.name = name
+        self.age  = age
+    }
+
+    convenience init(age : Int){
+        self.init(name : "hana", age : age)
+    }
+}
+
+var hana = Person(age: 10)
+print(hana.name)
+</pre></code>
+
+4. 실패가능한 이니셜라이즈 : init 함수에 ? 추가 하고 init 함수 내에 조건문을 걸어 nil값을 리턴
+<pre><code>
+class Person {
+    var name = ""
+    var age  = 10
+    
+    init?(name : String, age : Int) {
+        if (0...120).contains(age) == false{
+            return nil
+        }
+        self.name = name
+        self.age  = age
+    }
+}
+</pre></code>
+
+20강 옵셔널 체이닝
+===========
+1. 옵셔널 체이닝 : 옵셔널 요소 내부의 프로퍼티로 또 다시 옵셔널이 연속적으로 연결되어 있는 경우 닐체크 하는 기법, 중간에 하나라도 닐이 있다면 닐 리턴
+<pre><code>
+class Person {
+    var home : Apartment?
+    var job  : String?
+}
+
+class Apartment{
+    var owner : Person?
+    var guardner : Person?
+}
+
+var apertment = Apartment()
+
+//아파트의 소유주는 가드너 일까?
+if let guardnerJob = apertment.owner?.home?.guardner?.job {
+    print("맞음 \(guardnerJob)")
+}else{
+    print("아님")
+}
+</pre></code>
+
+2. 닐병합 연산자 : ?? 키워드로 닐값이면 ?? 뒤에 값을 사용
+<pre><code>
+class Person {
+    var home : Apartment?
+    var job  : String?
+}
+
+class Apartment{
+    var owner : Person?
+    var guardner : Person?
+}
+
+var apertment = Apartment()
+
+//아파트의 소유주는 가드너 일까?
+if let guardnerJob = apertment.owner?.home?.guardner?.job ?? "GuradNer"{
+    print("맞음 \(guardnerJob)")
+}
+</pre></code>
+
+21강 티입 캐스팅
+===========
+1. 타입 캐스팅 : 인스턴스의 타입을 확인할 때 쓰인다.(특히 딕셔너리에선 Any, AnyObject를 많이 사용하기 때문에 많이 사용된다.) is 키워드 사용
+<pre><code>
+class Person {
+}
+
+class Student: Person {
+}
+
+class UniversityStudent: Student {
+}
+
+var hana    = Person()
+var jason   = Student()
+var key     = UniversityStudent()
+
+if hana is Person {
+    print("hana 는 Person 클래스")
+}
+</pre></code>
+
+2. 기존의 타입캐스팅은 스위프트에선 지원하지 않는다. 새로운 타입으로 변수를 변경하고자 할때 엄격한 타입지정으로 인해 새로운 객체를 생성하여 넘겨주는 방법 밖에 없다.
+ 
+3. 업캐스팅 : as 를 사용하여 부모 클래스의 인스턴스로 사용 할 수 있는지 채크한다.
+<pre><code>
+class Person {
+}
+
+class Student: Person {
+}
+
+class UniversityStudent: Student {
+}
+
+//하나는 스트던트 인데 Person 클래스로 사용할 수 있는가 없다면 에러 반환
+var hana    = Student() as Person
+</pre></code>
+
+4. 다운 캐스팅 : as?, as! 를 사용하여 자식클래스의 인스턴스로 사용 할 수 있는지 체크한다.
+<pre><code>
+class Person {
+}
+
+class Student: Person {
+}
+
+class UniversityStudent: Student {
+}
+
+var hana    = Person()
+var jenny   = Student()
+var jina    = UniversityStudent()
+
+print(hana as? Student) //다운캐스팅 nil : Person클래스가 아닌 Student 로 쓸래?
+print(hana as! Student) //다운캐스팅 컴파일 에러 : Person클래스가 아닌 Student 로 써!
+</pre></code>
+
+22강 assert, guard
+===========
+1. assert 함수 : 디버깅모드에서만 가능한 조건의 검증을 위해 사용되는 함수 조건에 맞지 않다면 동작 중지 후 메세지를 띄어준다. 메세지가 없다면 띄우지 않음
+
+2. guard 구문 : 디버깅, 배포모드 둘다 가능한며 return, break 문을 통해 빠른 실행 및 종료가 가능한 검증 구문
+<pre><code>
+func someFunction (info : [String : Any]){
+    guard let name = info["name"] as? String else{
+        return
+    }
+    print(name)
+}
+</pre></code>
