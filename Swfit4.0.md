@@ -914,5 +914,78 @@ func someFunction (info : [String : Any]){
 2. 읽기 쓰기 / 읽기 전용 프로퍼티 요구는 연산프로퍼티로 대체 가능
 
 <pre><code>
+protocol Talkable{
+    //읽기, 쓰기 모두 가능
+    var topic : String {get set}
+    //읽기 만 가능
+    var language : String {get}
+    func talk()
+    init(topic : String, language : String)
+}
 
+struct Person : Talkable{
+    var language: String{
+        get {
+            return ("\(self.language) 언어이다.")
+        }
+        set{
+            self.language = newValue
+        }
+    }
+    var topic: String
+    
+    init(topic: String, language: String) {
+        self.topic      = topic
+        self.language   = language
+    }
+    
+    func talk() {
+        
+    }
+}
 </pre></code>
+
+3. 프로토콜은 다중상속이 가능하다. 부모클래스가 있다면 첫번쨰 란에 추가해주고 프로토콜 준수를 알려준다. 추가적으로 다운 캐스팅을 통해 해당 프로토콜을 준수하는지 체크 할 수 있다.
+<pre><code>
+protocol Readable{
+    func read()
+}
+protocol Writeable{
+    func write()
+}
+protocol ReadSpeakable : Readable {
+    //func read()
+    func speak()
+}
+
+protocol ReadWriteSpeakable : Readable,Writeable {
+    //func read()
+    //func write()
+    func speak()
+}
+
+struct SomeType : ReadWriteSpeakable{
+    func read() {
+        
+    }
+    func write() {
+        
+    }
+    func speak() {
+        
+    }
+}
+
+let sometype = SomeType()
+
+//is 를 통한 타입 확인
+print(sometype is Readable) //true
+
+//다운캐스팅을 통한 체크
+if let some = sometype as? Readable{
+    print(some)
+}else{
+    print("someType 은 Readable을 따르지 않는다.")
+}
+</pre></code>
+
