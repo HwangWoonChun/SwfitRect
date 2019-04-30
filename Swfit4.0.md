@@ -1237,7 +1237,9 @@ person?.room = nil
 person = nil
 </pre></code>
 
-* 약한 참조로 해결 : weak, 참조 타입의 프로퍼티 앞에 weak 키워드를 사용하여 자신이 참조 횟수를 증가 시키지 않는다. 상수는 불가, 매모리에서 해제 시 nil이 되며 닐이 할당될수 있어야 하기에 옵셔널 변수어야 한다. 
+5. 참조 횟수를 늘리지 않고 참조 하는 방법
+
+* 약한 참조로 해결 : weak, 참조 타입의 프로퍼티 앞에 weak 키워드를 사용하여 자신이 참조 횟수를 증가 시키지 않는다. 상수는 불가, 매모리에서 해제 시 nil이 되며 닐이 할당될수 있어야 하기에 옵셔널 변수어야 한다. 참조되는 동안 메모리에서 해제 될 가능성이 없다면 사용 "사람은 집을 소유 할 수도 있고 없어도 되며 집의 명의자는 사람일 수도 있고 아닐 수도 있다."
 <pre><code>
 class Person{
     weak var room : Room?
@@ -1261,4 +1263,22 @@ person = nil
 room = nil
 </pre></code>
 
+* 미소유 참조로 해결 : unowned, 참조 타입의 프로퍼티 앞에 unowned 키워드를 사용하여 자신의 잠조 횟수를 증가 시키지 않는다. 상수도 가능, 메모레서 해제시 nil 이 되지 않으며 옵셔널이여도 상관없다. 참조되는 동안 메모리에서 절대 해제 될 가능성이 없다면 사용 "사람이 집을 소유할수도 있고 없지만, 집의 주인은 사람이어야 한다."
+<pre><code>
+class Person{
+    var room : Room?
+}
 
+class Room{
+    unowned var person : Person?
+    init(person : Person) {
+        self.person = person
+    }
+}
+
+var person : Person? = Person()
+var room : Room? = Room(person: person!)
+
+person = nil
+room?.person    //error : 메모리 해제시 참조 객체가 자동으로 nil 이 되지 않는다.
+</pre></code>
