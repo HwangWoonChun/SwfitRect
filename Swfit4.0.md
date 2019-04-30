@@ -512,6 +512,69 @@ calculate(a: 10, b: 20, function: {
 })
 </pre></code>
 
+10. Escaping Closure : 함수가 종료되고 나 후 작업이 끝나고 호출될 필요가 있는 클로저를 사용할때 @escaping 키워드 사용
+* 함수를 탈출하는 클로저 예
+<pre><code>
+typealias VoidVoidClosure = ()->Void
+
+let fistClosure : VoidVoidClosure = {
+    print("A")
+}
+
+let secondClosure : VoidVoidClosure = {
+    print("B")
+}
+
+func returnOneClosure(first : @escaping VoidVoidClosure, second : @escaping VoidVoidClosure, shouldReturnFirstClosure : Bool) -> VoidVoidClosure {
+    
+    return shouldReturnFirstClosure ? first : second
+}
+
+//1. 함수에서 반환한 클로저를 외부 함수에 저장
+let returnClosure : VoidVoidClosure = returnOneClosure(first: fistClosure, second: secondClosure, shouldReturnFirstClosure: true)
+
+returnClosure() // A
+</pre></code>
+
+* 클래스 인스턴스 메서드에 사용되는 탈출, 비탈출 클로져
+<pre><code>
+typealias VoidVoidClosure = ()->Void
+
+func functionWithNoneEscapingClosure(closure : VoidVoidClosure){
+    closure()
+}
+
+func functionWithEscapingClosure(completionHanlder : @escaping VoidVoidClosure) -> VoidVoidClosure{
+    return completionHanlder
+}
+
+class SomeClass{
+    var x = 10
+    
+    func runNoneEsacpingClosure(){
+        functionWithNoneEscapingClosure {
+            //self 는 선택사항
+            x = 200
+        }
+    }
+    func runEsacpingClosure(){
+        functionWithEscapingClosure {
+            //탈출 클로저는 self 필수
+            self.x = 10
+        }
+    }
+}
+
+let instance : SomeClass = SomeClass()
+instance.runNoneEsacpingClosure()
+print(instance.x)   //200
+
+
+let returnClosure : VoidVoidClosure = instance.runEsacpingClosure
+returnClosure()
+print(instance.x)   //10
+</pre></code>
+
 16강 Capturing Value
 ===========
 1. Capturing Value : 함수나 클로져는 참조타입으로 어느 변수에 대입되고 그 변수를 또다시 다른 변수에 대입 시 복사본이 아닌 기존 원본 그대로 사용된다.
