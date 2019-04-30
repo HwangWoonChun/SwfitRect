@@ -1192,7 +1192,7 @@ let sumFromThree = numbers.reduce(3){$0 + $1}
 
 27강 ARC
 ===========
-1. 메모리의 한계 : 클래스는 참조타입임으로 여러곳에서 접근 할 수 있다. 적절한 시점에 인스턴스를 해제하지 않으면 한정된 메모리 자원을 낭비하고 성능 저하를 부른다.
+1. 메모리의 한계 : 클래스, 클로져는 참조타입임으로 여러곳에서 접근 할 수 있다. 적절한 시점에 인스턴스를 해제하지 않으면 한정된 메모리 자원을 낭비하고 성능 저하를 부른다.
 
 2. ARC : 컴파일과 동시에 자동으로 메모리를 관리하는 기법
 
@@ -1281,4 +1281,150 @@ var room : Room? = Room(person: person!)
 
 person = nil
 room?.person    //error : 메모리 해제시 참조 객체가 자동으로 nil 이 되지 않는다.
+</pre></code>
+
+6. 클로저의 강한 참조 순환 : 클로저가 클래스와 같은 참조타입이기때문에 순환이 발생 할 수 있다.
+* lazy : 클로저 내부에서 self 프로퍼티를 사용 할 수 있게 해줌
+* introduce 프로퍼티를 통해  클로저를 호출 > 클로저 내부 참조 타입 변수 등을 획득 > 클로저는 자신이 호출 되면 언제든지 자신 내부의 참조들을 사용 할 수 있도록 참조 횟수를 증가 시켜 메모리 해제 됨을 방지 > self 인스턴스의 참조 횟수도 증가
+* 결론 : 클로저가 self 프로퍼티를, self 프로퍼티도 클로저를 참조하여 인스턴스를 nil 해도 deinit 함수가 호출 되지 않는다. 
+<pre><code>
+class Person {
+    let name : String
+    let hobby : String?
+    
+    lazy var introduce : () -> String = {
+        var introduction : String = "Hello my Name is \(self.name)"
+        
+        guard let hobby = self.hobby else{
+            return introduction
+        }
+    
+        introduction += " "
+        introduction += "My Hobby is \(hobby)"
+        return introduction
+    }
+    init(name : String, hobby : String? = nil) {
+        self.name = name
+        self.hobby = hobby
+    }
+    deinit {
+        print("\(name) is being deinit")
+    }
+}
+
+var a : Person? = Person(name: "a", hobby: "develop")
+print(a?.introduce)
+a = nil
+
+</pre></code>
+
+7 캡쳐리스트 : 클로저 내부에서 참조 타입을 획득하는 규칙을 제시하는 기능
+
+* 표현 방식
+<pre><code>
+[] in
+</pre></code>
+
+* 캡쳐리스트를 통한 값 획득 : a는 클로저가 생성 된 후에 값을 가질 수 있게 된다.
+
+<pre><code>
+// 캡쳐리스트 미사용
+var a = 0
+var b = 0
+
+let closure = { 
+    print(a,b)
+    b = 20
+}
+
+a = 10
+b = 10
+
+closure()   //10,10
+print(b)    //20
+</pre></code>
+<pre><code>
+// 캡쳐리스트 사용
+var a = 0
+var b = 0
+
+let closure = {[x] in 
+    print(a,b)
+    b = 20
+}
+
+a = 10
+b = 10
+
+closure()   //0,10
+print(b)    //20
+</pre></code>
+
+* 참조타입의 캡쳐리스트의 동작 : 캡쳐리스트의 요소가 참조타입인 경우 x.value 가 0으로 나오지 않고 바로 10 반영이 된다. 이유는 두 변수 모두가 참조 타입의 인스턴스가 있기 때문이다. 
+<pre><code>
+class SimpleClass {
+    var value : Int = 0
+}
+
+var x = SimpleClass()
+var y = SimpleClass()
+
+let closure = {[x] in
+    print(x.value,y.value)
+}
+
+x.value = 10
+y.value = 10
+
+closure()   // 10, 10
+</pre></code>
+
+* 참조타입의 캡쳐리스트의 종류 명시 : 참조타입의 캡쳐리스트에서 어떤 방식으로 참조 할지(strong, weak, unowned) 정해줄 수 있다.
+<pre><code>
+class SimpleClass {
+    var value : Int = 0
+}
+
+var x : SimpleClass? = SimpleClass()
+var y = SimpleClass()
+
+let closure = {[weak x, unowned y] in
+    print(x?.value,y.value)
+}
+
+x = nil
+y.value = 10
+
+closure()   // nil, 10
+</pre></code>
+
+* 클로저의 강한 순환 참조 문제 해결
+<pre><code>
+class Person {
+    let name : String
+    let hobby : String?
+    
+    lazy var introduce : () -> String = {[unowned self] in
+        var introduction : String = "Hello my Name is \(self.name)"
+        
+        guard let hobby = self.hobby else{
+            return introduction
+        }
+        
+        introduction += " "
+        introduction += "My Hobby is \(hobby)"
+        return introduction
+    }
+    init(name : String, hobby : String? = nil) {
+        self.name = name
+        self.hobby = hobby
+    }
+    deinit {
+        print("\(name) is being deinit")
+    }
+}
+
+var a : Person? = Person(name: "a", hobby: "develop")
+print(a?.introduce)
+a = nil
 </pre></code>
