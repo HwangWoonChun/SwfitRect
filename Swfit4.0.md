@@ -1189,3 +1189,76 @@ let sum = numbers.reduce(0, { (first : Int, second : Int) -> Int in
 
 let sumFromThree = numbers.reduce(3){$0 + $1}
 </pre></code>
+
+27강 ARC
+===========
+1. 메모리의 한계 : 클래스는 참조타입임으로 여러곳에서 접근 할 수 있다. 적절한 시점에 인스턴스를 해제하지 않으면 한정된 메모리 자원을 낭비하고 성능 저하를 부른다.
+
+2. ARC : 컴파일과 동시에 자동으로 메모리를 관리하는 기법
+
+3. 강한참조 : 인스턴스가 필요에 의해 메모리에 계속 남아 있어야하는 명분을 만들어 주는 것
+
+4. 강한 참조 순환 문제 : 복합적인 강한참조 상황, 레퍼런스 카운트가 0이 되지 않고 남아있음
+<pre><code>
+class Person{
+    var room : Room?
+}
+
+class Room{
+    
+    var host : Person?
+    
+    deinit {
+    }
+}
+
+var person : Person? = Person() //Person count 1
+var room : Room? = Room() // Room Count 1
+
+room?.host = person //Person Count 2
+person?.room = room // Room Count 2
+
+person = nil //Person Count 1
+room = nil //Room Count 1
+</pre></code>
+
+* 수동으로 해결 : 서로 참조하는 상황을 nil 로 만들어 준다.
+<pre><code>
+var person : Person? = Person() //Person count 1
+var room : Room? = Room() // Room Count 1
+
+room?.host = person //Person Count 2
+person?.room = room // Room Count 2
+
+room?.host = nil
+room = nil
+
+person?.room = nil
+person = nil
+</pre></code>
+
+* 약한 참조로 해결 : weak, 참조 타입의 프로퍼티 앞에 weak 키워드를 사용하여 자신이 참조 횟수를 증가 시키지 않는다. 상수는 불가, 매모리에서 해제 시 nil이 되며 닐이 할당될수 있어야 하기에 옵셔널 변수어야 한다. 
+<pre><code>
+class Person{
+    weak var room : Room?
+}
+
+class Room{
+    
+    weak var host : Person?
+    
+    deinit {
+    }
+}
+
+var person : Person? = Person() //Person count 1
+var room : Room? = Room() // Room Count 1
+
+room?.host = person //Person Count 2
+person?.room = room // Room Count 2
+
+person = nil
+room = nil
+</pre></code>
+
+
