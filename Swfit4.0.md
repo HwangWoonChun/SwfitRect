@@ -19,45 +19,6 @@ Swfit 4.0 Recture
 
 [5강 함수](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect05.md)
 ===========
-1. 함수
-<pre><code>
-func 함수이름(매개변수 : 매개변수타입,......) -> 리턴(생략가능) {
-}
-</code></pre>
-2. 전달 인자 레이블 : 매개변수의 역할을 좀더 명확하게 하거나, 함수 사용자를 위한 배려
-<pre><code>
-//전달인자레이블 선언
-func 함수이름(전달인자레이블 매개변수 : 매개변수타입,......) -> 리턴(생략가능) {
-}
-func 함수이름2(_ 매개변수 : 매개변수타입,.......)-> 리턴(생략가능){
-}
-
-//전달인자레이블 사용
-함수이름(레이블:매개변수)
-//언더바를 사용하여 매개변수 생략사용
-함수이름2(매개변수)
-</code></pre>
-3. 가변매개변수 : friends를 배열 형태로 받을 수 있다. 함수당 하나 사용 가능
-<pre><code>
-func getFreinds(friends : String...) -> void {
-}
-</code></pre>
-**4. 스위프트의 함수 : 스위프트는 함수형프로그래밍 패러다임을 가지고있다. 스위프트의 함수는 일급객채로서 매개변수와 리턴 값으로 활용 할 수 있다.**
-<pre><code>
-func sayHello(to me : String, from frined : String){
-    print("\(me) \(frined)")
-}
-
-//함수를 객채화
-var variableFunc : ((String, String)->Void) = sayHello(to:from:)
-variableFunc("a","b")
-
-//함수를 매개변수화
-func sayHello2(function : ((String, String)->Void)) -> Void{
-    function("a","b")
-}
-sayHello2(function: variableFunc)
-</code></pre>
 
 
 7강 함수고급
