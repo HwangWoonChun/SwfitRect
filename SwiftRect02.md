@@ -14,3 +14,7 @@ Swfit 4.0 Recture
 let a
 print(a)  //error
 </pre></code>
+
+5. 기본 데이터 타입으로는 bool, int, float, double, character, string
+* character 경우 유니코드로 한글자 면 가능하다.
+* 스트링은 += 로 추가가 가능하다.
