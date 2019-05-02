@@ -1,7 +1,7 @@
 # SwfitRect
 Swfit 4.0 Recture
 
-05강 함수
+5강 함수
 ===========
 1. 함수의 기본 형태
 <pre><code>
@@ -39,12 +39,13 @@ function(argument: &a)  //hey hwang
 print(a)                //hey hwang
 </pre></code>
 
-5. 가변매개변수 : 매개변수를 배열형태로 받을 때 사용, 함수당 하나 사용 가능하다
+5. 가변매개변수 : 매개변수를 배열형태로 받을 때 사용, 함수당 하나 사용 가능하다. 사용하지 않을 시엔 생략 가능
 <pre><code>
 func function(argument : String, arguments : String...){
     print("\(argument)\(arguments)")
 }
 function(argument: "Hey", arguments:"hwang1","hwang2")
+function(argument: "Hey")   //생략가능
 </pre></code>
 
 6. 스위프트의 함수는 함수형 프로그래밍 패러다임을 가지고 있다. 이는 함수가 일급객체로서 객채로서, 매개변수 및 리턴 값으로 사용 가능하다는 의미이다.
