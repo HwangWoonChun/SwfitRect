@@ -1,7 +1,7 @@
 # SwfitRect
 Swfit 4.0 Recture
 
-1강 [맛뵈기](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect01)
+1강 [맛뵈기](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect01.md)
 ===========
 1. 이름짓기 : 카멜케이스를 따른다.
 > 카멜케이스 : 각 단어의 첫문자를 대문자로 표기하고 붙여쓰되, 맨처음 문자는 소문자로 표기함. 띄어쓰기 대신 대문자로 단어를 구분하는 표기 방식
@@ -12,7 +12,7 @@ Swfit 4.0 Recture
 
 3. 문자열 보간법 : \()
 
-2강 상수와 변수
+2강 [상수와 변수](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect02.md)
 ===========
 1. 상수
 <pre><code>
@@ -26,23 +26,13 @@ var a : type = value
 > 2. 스위프트는 띄어쓰기에 민감하다.
 > 3. 변수를 초기화 하지 않고 쓰면 에러 발생
 
-3강 데이터 타입
-===========
-1. bool, Int, Float, Double, Character, String
-> 1. 캐릭터는 유니코드로 한글자여야한다.
-> 2. 스트링의 경우 하기와 같이 += 연산자로 insert 가능
-<pre><code>
-var a = "abc"
-a+="d"
-</code></pre>
-
-4강 Any, AnyObject, nil
+3강 [Any, AnyObject, nil](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect03.md)
 ===========
 1. Any : 모든 데이터타입을 수용 할 수 있는 타입
 2. AnyObject : 모든 클래스 타입을 수용 할 수 있는 타입
 3. nil : 값이 없음을 나타내며, 옵셔널이 적용되지 않았다면 Any, AnyObject타입은 닐이 될 수 없다.
 
-5강 컬랙션 타입
+4강 [컬랙션 타입]
 ===========
 1. Array, Dictionary, Set
 2. Array : 순서가 있고 중복 가능한 컬랙션 타입
