@@ -1,7 +1,7 @@
 # SwfitRect
 Swfit 4.0 Recture
 
-1강 이름짓기, 콘솔로그, 보간법 <https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect01>
+1강 [맛뵈기](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect01)
 ===========
 1. 이름짓기 : 카멜케이스를 따른다.
 > 카멜케이스 : 각 단어의 첫문자를 대문자로 표기하고 붙여쓰되, 맨처음 문자는 소문자로 표기함. 띄어쓰기 대신 대문자로 단어를 구분하는 표기 방식
