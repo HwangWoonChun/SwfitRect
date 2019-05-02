@@ -17,7 +17,7 @@ Swfit 4.0 Recture
 ===========
 
 
-6강 함수
+[5강 함수](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect05.md)
 ===========
 1. 함수
 <pre><code>
