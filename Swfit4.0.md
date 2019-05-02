@@ -1438,4 +1438,186 @@ a = nil
 제너릭을 사용하고자 하는 이름 <타입 : 매개변수> (함수의 매개변수)
 </pre></code>
 
-2. 제너릭을 사용하지 
+2. 제너릭을 사용하지 않은 swap 함수 : Int 형만 가능
+//Inout은 함수에서 직접 파라미터로 변수의 주소값을 넘겨 직접 접근할 수 있도록 해주는 기능
+func swapTwoInts( a : inout Int, b : inout Int){
+    let tempA = a
+    a = b
+    b = tempA
+}
+
+var nuberOne : Int = 5
+var nuberTwo : Int = 10
+
+swapTwoInts(a: &nuberOne, b: &nuberTwo) //10, 5
+
+3. 제너릭 함수 : T의 실제 타입은 함수가 호출될때 그 순간 결정
+<pre><code>
+func swapTwoValue<T>( a : inout T, b : inout T){
+    let tempA = a
+    a = b
+    b = tempA
+}
+
+var nuberOneInt : Int = 5
+var nuberTwoInt : Int = 10
+
+var nuberOneString : String = "5"
+var nuberTwoString : String = "10"
+
+swapTwoValue(a: &nuberOneInt, b: &nuberTwoInt) //10, 5
+swapTwoValue(a: &nuberOneString, b: &nuberTwoString) //10, 5
+swapTwoValue(a: &nuberOneInt, b: &nuberTwoString) //10, 5   //서로 같은 타입 만 가능 에러
+</pre></code>
+
+4. 제너릭 타입 : 제너릭 타입을 구현하여 사용자 정의 타입인 구조체, 클래스, 열거형 등이 어떤 타입과도 연관되어 동작 할 수 있음.
+<pre><code>
+//Int 타입의 스택 > 해결법 : Any이용, 재너릭 이용
+// Any : 모든 타입을 수용 하도록 구현 시
+// 스택의 한 요소로 지정해주면 그 타입을 계속 스택이 동작하길 바랄때 사용
+struct IntStack {
+    var items = [Int]()
+    mutating func push(item : Int){
+        items.append(item)
+    }
+    mutating func pop() -> Int{
+        return items.removeLast()
+    }
+}
+
+//재너릭 타입
+
+    var items = [Element]()
+    mutating func push(item : Element){
+        items.append(item)
+    }
+    mutating func pop() -> Element{
+        return items.removeLast()
+    }
+}
+
+var doubles : Stack<Double> = Stack<Double>()
+var anys    : Stack<Any> = Stack<Any>()
+</pre></code>
+    
+5. 제너릭 타입 확장 : 
+<pre><code>
+struct Stack<Element> {
+    var items = [Element]()
+    mutating func push(item : Element){
+        items.append(item)
+    }
+    mutating func pop() -> Element{
+        return items.removeLast()
+    }
+}
+
+extension Stack{    //타입 인자 목록 명시 하면 안된다. 익스텐션 내부에서 사용
+    var topElement : Element?{
+        return self.items.last
+    }
+}
+
+var doubles : Stack<Double> = Stack<Double>()
+doubles.push(item: 0)
+doubles.push(item: 1)
+
+print(doubles.topElement!)  //1.0
+</pre></code>
+
+6. 타입제약 : 클래스 타입, 프로토콜에 줄 수 있다. 열거형, 구조체에는 불가능
+<pre><code>
+func findStringIndex(array : [String], valueToFind : String) ->Int? {
+    
+    for (index,value) in array.enumerated(){
+        if value == valueToFind{
+            return index
+        }
+    }
+    return nil
+}
+
+//func findIndex<T>(array : [T], valueToFind : T) -> Int?{
+//    for (index,value) in array.enumerated(){
+//        if value == valueToFind{    //에러 T 타입의 연산에 대한 보장을 못해주기 떄문에
+//            return index
+//        }
+//    }
+//    return nil
+//}
+
+//Equatable 프로토콜은 동등 연산을 지원하는 것에 대한 보장
+//
+func findIndex<T : Equatable>(array : [T], valueToFind : T) -> Int?{
+    for (index,value) in array.enumerated(){
+        if value == valueToFind{    //에러 T 타입의 연산에 대한 보장을 못해주기 떄문에
+            return index
+        }
+    }
+    return nil
+}
+</pre></code>
+
+<pre><code>
+whrere 절로도 제약이 가능하다.
+</pre></code>
+
+6. 프로토콜의 연관타입(associatedtype) : 프로토콜에서 사용할 수 있는 플레이스 홀드 명, 어떤 타입이 매개변수 인지 모르지만 어떤 타입이 여기에 쓰일 것이다. 라는 표현
+<pre><code>
+protocol Container {
+    associatedtype ItemType
+    var count : Int {get}
+    mutating func append (item : ItemType)
+    subscript(i : Int) -> ItemType {get}
+}
+
+//존재 하지 않는 타입인 itemType을 연관 타입으로 정의
+//재너릭과 유사한 기능 '그 어떤 것도 상관 없지만, 하나의 타입임은 분명'
+// 1. append를 통해 추가해야한다.
+// 2. 아이템 개수를 확인 할수 있도록 count 프로퍼티 구현
+// 3. Int 타입의 인덱스 값으로 특정 인덱스에 해당하는 아이템을 가져 올 수 있는 subscript 구현
+
+class MyContainer : Container{
+    var items : Array<Int> = Array<Int>()
+    
+    var count: Int{
+        return items.count
+    }
+    func append(item : Int) {
+        items.append(item)
+    }
+    subscript(i : Int) -> Int{
+        return items[i]
+    }
+}
+
+struct IntStack : Container{
+    
+    //type에 별칭을 매겨, 아이템 타입을 어떤 타입으로 사용 할지 명확하게 해줌
+    typealias ItemType = Int
+    
+    var items = [ItemType]()
+    
+    var count: Int{
+        return items.count
+    }
+
+    //구조체의 프로퍼티가 수정이 필요하다면 mutating
+    mutating func push(item : ItemType){
+        self.items.append(item)
+    }
+    
+    mutating func pop(){
+        self.items.removeLast()
+    }
+    
+    mutating func append(item: Int) {
+        self.push(item: item)
+    }
+        
+    subscript(i : Int) -> Int{
+        return items[i]
+    }
+}
+
+</pre></code>
