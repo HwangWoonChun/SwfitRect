@@ -3,52 +3,26 @@ Swfit 4.0 Recture
 
 [1강 맛뵈기](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect01.md)
 ===========
-
+* * *
 
 [2강 상수와 변수](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect02.md)
 ===========
-
+* * *
 
 [3강 Any, AnyObject, nil](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect03.md)
 ===========
-
+* * *
 
 [4강 컬랙션 타입](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect04.md)
 ===========
-
+* * *
 
 [5강 함수](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect05.md)
 ===========
+* * *
 
 
-7강 함수고급
-===========
-1. 매개변수 기본값
-> 1. 기본값을 갖는 매개변수는 목록중 맨뒤에 위치하도록 한다.
-<pre><code>
-func fucntion(arg1 : String, srg2 : String = "a"){   
-}
-//매개변수 기본값을 가지게 되면 생략이 가능하다.
-function(arg1:"a")
-</code></pre>
-
-2. 전달인자 레이블
-> 1. 함수내부에서는 전달인자를 사용할때 매개변수 이름을 사용하며, 함수 호출 시 레이블을 사용한다.
-
-3. 가변매개변수 
-> 1. 호출 시 생략 가능하다.
-<pre><code>
-func function(arg1 : String, arg2 : String...){
-}
-function(arg1:"a")
-</code></pre>
-
-**4. 데이터 변수로서의 함수**
-> 1. 스위프트는 함수형 프로그래밍을 포함하는 다중 패러다임 언어
-> 2. 스위프트는 함수는 일급객체, 변수로서 상수로서 저장이 가능
-> 3. 매개변수를 통해 전달
-
-8강 조건문
+[6강 조건문](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect06.md)
 ===========
 1. if else, switch case
 > 1. if else : 중괄호 생략 불가능
