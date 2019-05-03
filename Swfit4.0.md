@@ -27,66 +27,7 @@ Swfit 4.0 Recture
 
 [7강 옵셔널](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect07.md)
 ===========
-1. 옵셔널
-> 1. 옵셔널은 값이 있을 수 있고 없을 수 있음을 나타내는 타입
-> 2. 장단점
->> * 장점 : 닐의 가능성을 문서화하지 않고 충분히 코드로 작성이 가능하다.(주석,문서 처리 시간 절약)
->> * 단점 : 옵셔널이 아닌 값을 사용시 컴파일러 단계에서 오류
-> 3. 옵셔널 타입 : 열거형으로서 .none, .some 타입이 있다.
-> 4. 옵셔널 문법
->> * 옵셔널 완전 문법 : let a : Optional<Int> = nil
->> * 옵셔널 보통 문법 : let a : Int? = nil
-> 5. 옵셔널의 사용 : ?, ! 키워드를 사용
->> * ? : 일반적인 옵셔널 / 값이 있을수도있고 없을수도 있음을 표현 / 기존 변수처럼 사용, 연산 불가능 / nil 할당 가능
->> * ! : 암시적 추출 옵셔널 / 기존 변수처럼 사용가능 / 닐 할당 가능하나 이후 접근시 에러
-   
-10강 옵셔널 추출   
-===========
-1. 옵셔널 추출방식 : 옵셔널은 일반 값과 다르게 매개변수로 전달 및 연산이 불가능 하기에 사용하려면 다음과 같은 방법으로 사용해야한다.
-> 1. 옵셔널 바인딩
-> 2. 옵셔널 강제추출
-> * 예 : 옵셔널을 매개변수로 전달하게 되면 에러가 발생하게된다.
-<pre><code>
-func description(name : String){
-    print(name)
-}
-
-var myName : String? = ""
-
-description(name: myName) // 컴파일 에러
-</pre></code>
-
-2. 옵셔널 바인딩 : 닐 체크함을 동시에 값을 꺼내오는 방법
-<pre><code>
-//옵셔널 바인딩의 기본적 사용방법
-func description(name : String){
-    print(name)
-}
-
-var myName : String? = ""
-
-if let bindingMyName = myName{
-    description(name: bindingMyName)
-}
-</pre></code>
-<pre><code>
-//여러 데이터들을 바인딩 시 아래와 같이 사용한다, 변수가 하나라도 닐이라면 코드 실행 불가
-var myName  : String?   = ""
-var nilName : String?   = nil
-
-if let bindingMyName = myName, let bindingName2 = nilName{
-    description(name: bindingMyName)
-}
-</pre></code>
-
-3. 옵셔널 강제추출 방식 : !로 강제 추출, 추출후 닐이 되어 데이터 다시 접근 시 에러
-<pre><code>
-var variable : String? = ""
-someFunction(name : variable!)
-variable = nil
-print(variable)  //warning 이 상태로 사용하게된다면 Optional(data) or nil 로 로그가 남게된다.
-print(variable!) //error
-</pre></code>
+* * *
 
 11강 구조체
 ===========
