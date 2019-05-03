@@ -21,33 +21,11 @@ Swfit 4.0 Recture
 ===========
 * * *
 
-
 [6강 조건문](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect06.md)
 ===========
-1. if else, switch case
-> 1. if else : 중괄호 생략 불가능
-> 2. switch case : 브레이크를 명시적으로 사용하지 않아도 브레이크문에 걸려 조건에 만족하면 빠져나온다. 하지만 fallthrough 를 사용하면 조건 성공시 다음 케이스문 실행된다.
-<pre><code>
-var someInteger = 3
+* * *
 
-switch someInteger {
-case 0:
-    print("0")
-case 1..<2: //범위연산자
-    print("1이상 100미만")//기본적으로 fallthrough 를 따른다. 케이스문이 자동으로 다음번 케이스문으로 진행
-case 2...3: // 범위연산자
-    print("2이상 3이하")
-    fallthrough
-case 4:
-    print("4")
-case 5:
-    print("5")
-default:
-    print("defalut")
-}
-</code></pre>
-
-9강 옵셔널
+[7강 옵셔널](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect07.md)
 ===========
 1. 옵셔널
 > 1. 옵셔널은 값이 있을 수 있고 없을 수 있음을 나타내는 타입
