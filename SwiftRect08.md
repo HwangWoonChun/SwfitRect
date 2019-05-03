@@ -4,7 +4,7 @@ Swfit 4.0 Recture
 8강 구조체
 ===========
 1. 스위프트의 대부분은 구조체로 구현 되어있음
-
+* * *
 2. let 구조체 인스턴스 : 가변 프로퍼티의 수정이 불가능, 클래스는 가능
 <pre><code>
 struct Struct{
@@ -21,7 +21,7 @@ class Class{
 let instance = Class()
 instance.property = 10  //Success
 </pre></code>
-
+* * *
 3. 구조체 자체를 위한 구조체 타입 메소드와 타입 프로퍼티 구현 : static 키워드 사용
 * 타입 프로퍼티(메소드) : 구조체 타입을 위한 속성 값 및 기능
 <pre><code>
