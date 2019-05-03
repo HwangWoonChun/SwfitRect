@@ -35,58 +35,7 @@ Swfit 4.0 Recture
 
 [9강 클래스](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect09.md)
 ===========
-1. 클래스 : 애플 프래임워크 대부분의 타입은 클래스로 이루어져있음, 타입을 정하기 때문에 대문자 카멜 케이스
-> 1. 클래스는 참조 타입
-> 2. let : let 으로 정해진 구조체 변수는 가변 프로퍼티를 수정이 가능
-<pre><code>
-class Sample {
-    var varProperty : Int = 0
-}
-
-//사용
-let immutable : Sample = Sample()
-immutable.varProperty = 10 //ok
-
-var mutable : Sample = Sample()
-mutable.varProperty = 20 //ok
-</pre></code>
-> 3. static : 재정의 불가능 타입 메소드
-> 4. class  : 재정의 가능한 타입 메소드
-<pre><code>
-class Sample {
-    //가변프로퍼티
-    var varProperty : Int = 0
-    //불변
-    let letPropergty : Int = 0
-    //타입 프로퍼티
-    static var typeProperty : Int = 0
-    //재정의 불가능 타입 메소드
-    static func typeMethod(){
-    }
-    //재정의 가능 타입 메소드
-    class func classMethod(){
-    }
-}
-
-//클래스의 타입 메소드
-var sample : Sample = Sample()
-//sample.typeMethod() //error
-//sample.classMethod() //error
-
-Sample.typeMethod() // ok
-Sample.classMethod() // ok
-
-//Static : 재정의 불가능 타입 메소드
-//Class  : 재정의 가능 타입 메소드
-class subSample : Sample{
-    //error
-    override static func typeMethod(){
-    }
-    //OK
-    override class func classMethod(){
-    }
-}
-</pre></code>
+* * *
 
 13강 열거형 
 ===========
