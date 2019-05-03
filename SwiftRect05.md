@@ -18,6 +18,7 @@ func function(label argument : String){
 
 function(label: "hey") //사용시 레이블 명으로
 </pre></code>
+* * *
 
 3. 언더바 키워드를 통해 함수 사용시 매개변수 명 생략
 <pre><code>
@@ -27,6 +28,7 @@ func function(_ argument : String){
 
 function("hey")
 </pre></code>
+* * *
 
 4. inout 키워드를 통해 매개변수 참조
 <pre><code>
@@ -39,6 +41,7 @@ var a = "hey"
 function(argument: &a)  //hey hwang 
 print(a)                //hey hwang
 </pre></code>
+* * *
 
 5. 가변매개변수 : 매개변수를 배열형태로 받을 때 사용, 함수당 하나 사용 가능하다. 사용하지 않을 시엔 생략 가능
 <pre><code>
@@ -48,6 +51,7 @@ func function(argument : String, arguments : String...){
 function(argument: "Hey", arguments:"hwang1","hwang2")
 function(argument: "Hey")   //생략가능
 </pre></code>
+* * *
 
 6. 스위프트의 함수는 함수형 프로그래밍 패러다임을 가지고 있다. 이는 함수가 일급객체로서 객채로서, 매개변수 및 리턴 값으로 사용 가능하다는 의미이다.
 <pre><code>
@@ -65,3 +69,12 @@ func functionArgumnet(function : ((String,String...)->Void)){
 }
 functionArgumnet(function: functionValue) //a ["b", "c"]
 </pre></code>
+* * *
+
+7. 기본값을 가지는 매개변수
+<pre><code>
+func function(argument : String, argument2 : String = ""){
+    print("\(argument)\(argument2)")
+}
+</pre></code>
+* * *
