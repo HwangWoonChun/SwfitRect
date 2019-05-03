@@ -1,7 +1,7 @@
 # SwfitRect
 Swfit 4.0 Recture
 
-8강 Class
+9강 Class
 ===========
 1. Coacoa framework 는 대부분 클래스로 구현되어 있음
 * * *
