@@ -99,3 +99,41 @@ func returnOneClosure (first : @escaping VoidClosure, second : @escaping VoidClo
     return  checkClosure ? first : second
 }
 </pre></code>
+
+<pre><code>
+//클로져를 외부함수에 저장힐때도 사용
+
+var completionHandlers : [()->Void] = []
+
+func functionWithNoneEscapingClosure (closure : ()->Void){
+    closure()
+}
+
+func functionWithEscapingClosure (closure : @escaping ()->Void) {
+    completionHandlers.append(closure)
+}
+
+class Class{
+    var x = 10
+    
+    func runningClosure() {
+        
+        functionWithEscapingClosure {
+            self.x = 100    //self 는 필수사항
+        }
+        
+        functionWithNoneEscapingClosure {
+            x = 200 //self 는 선택사항
+        }
+
+    }
+
+}
+
+let myClass = Class()
+myClass.runningClosure()
+print(myClass.x)    //200
+
+completionHandlers.first?()
+print(myClass.x)    //100
+</pre></code>
