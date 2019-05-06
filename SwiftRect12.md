@@ -81,3 +81,21 @@ calculate(first: 10, second: 20) {
     $0 + $1
 }
 </pre></code>
+* * *
+5. Escaping Closure : 함수가 종료된 후 매개변수로 사용되는 클로져를 호출할때 사용, 보통 비동기 함수 구현 시 사용된다.
+<pre><code>
+//매개변수 클로져를 리턴으로 가지는 함수 사용시 매개변수에 @escaping 키워드 명시
+typealias VoidClosure = ()->Void
+
+let closureA : VoidClosure = {
+    print("closureA")
+}
+
+let closureB : VoidClosure = {
+    print("closureB")
+}
+
+func returnOneClosure (first : @escaping VoidClosure, second : @escaping VoidClosure, checkClosure : Bool) -> VoidClosure{
+    return  checkClosure ? first : second
+}
+</pre></code>
