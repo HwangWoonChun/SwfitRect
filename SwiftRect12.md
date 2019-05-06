@@ -135,5 +135,5 @@ myClass.runningClosure()
 print(myClass.x)    //200
 
 completionHandlers.first?()
-print(myClass.x)    //100
+print(myClass.x)    //100, append를 통해 외부 클로져를 저장하고 함수를 빠져나가게 된다.
 </pre></code>
