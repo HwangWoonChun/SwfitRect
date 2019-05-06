@@ -37,94 +37,15 @@ Swfit 4.0 Recture
 ===========
 * * *
 
-13강 열거형 
+[10강 열거형](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect10.md)
 ===========
-1. 열거형 : enum 키워드를 사용하여 나열 혹은 열거되는 데이터들을 저장하는 자료구조
-> 1. 스위프트의 열거형 : 정수 뿐만 아니라 hasable 프로토콜을 따르는 모든 타입이 원시값의 타입으로 지정 가능
-> * hashable 프로토콜 : hashable 을 프로토콜을 준수하는 모든 타입의 인스턴스들은 hashValue를 가지게 되는데 이는, 각각의 인스턴스를 식별한다. 그렇기 때문에 각각의 인스턴스 들은 고유한 값을 가지게 된다. Set, Dictionary, enum 등이 이와 같은 프로토콜을 따른다. "중복이 불가능 하다 라는 뜻"
-2. 스위치 케이스 예문 : 케이스 데이터가 하나라도 빠지게 되면 default를 넣어줘야 한다.
-<pre><code>
-enum WeekDay {
-    case mon
-    case tue
-    case wed
-    case thu, fri, sat, sun
-}
+* * *
 
-var day : WeekDay = WeekDay.mon
-
-//switch-case 에 사용
-switch day {
-case .mon, .tue, .wed, .thu:
-    print("평일")
-case .fri:
-    print("금요일")
-//열거형 데이터가 케이스문에 (토,일)이 빠져있다면 default 는 꼭 넣어줘야한다.
-default:
-    print("")
-}
-</pre></code>
-3. 원시 값 : 각 케이스 데이터에 접근 하거나 케이스 데이터를 초기화를 하기 위한 값
-<pre><code>
-enum Fruit : String{
-    case apple = "apple"
-    case grape = "grape"
-    case peach // peach
-}
-
-//원시값 뽑아내기
-print(Fruit.apple.rawValue) // 2
-
-//원시 값 초기화
-//rawValue가 case 에 해당 되지 않을 수 있기 때문에 옵셔널을 사용해야한다.
-let apple : Fruit? = Fruit(rawValue: "apple")
-if let grape = Fruit(rawValue: "grape"){
-    print(grape)
-}
-</pre></code>
-4. 열거형 타입의 함수도 정의 가능하다.
-<pre><code>
-//메소드 : 스위프트의 열거형은 안에 메소드를 추가 할 수 있다.
-enum Alphabet : String{
-    case a = "a"
-    case b = "b"
-    
-    func description(){
-        print("\(Alphabet.a)\(Alphabet.b)")
-    }
-}
-Alphabet.a.description()
-</pre></code>
-
-14강 값 타입, 참조 타입 
+[11강 값타입, 참조타입](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect11.md)
 ===========
-1. 클래스 : 단일 상속 / 메소드 및 프로퍼티(인스턴스/타입) / 참조타입 / 애플 프레임워크 큰 뼈대는 클래스로 구성 / 익스텐션 가능
-2. 구조체 : 상속 불가 / 메소드 및 프로퍼티(인스턴스/타입) / 값 타입 / 스위프트 대부분의 큰 뼈대는 구조체로 구성 / 익스텐션 가능
-3. 열거형 : 상속 불가 / 메소드 및 프로퍼티(인스턴스/타입) / 값 타입 / 익스텐션 가능
-4. 구조체 사용
-> 1. 연관된 몇몇의 값을 모아 하나의 데이터 타입으로 표현 하고 싶을때 사용(클래스와 동일)
-> 2. 다른 객체, 함수등으로 전달 될때 참조가 아닌 복사를 원할때
-> 3. 상속이 받거나 주는 필요가 없을 때
-5. 값 타입 : 데이터 전달 시 값을 복사하여 전달 하는 타입
-6. 참조타입 : 데이터 전달 시 값을 참조하여 메모리 위치를 전달 하는 타입
-<pre><code>
-struct SomeStruct {
-    var someProperty : String = "Property"
-}
+* * *
 
-var someStructInstance : SomeStruct = SomeStruct()
-
-func someFunction (structInstace : SomeStruct){
-    var localVar : SomeStruct = structInstace
-    localVar.someProperty = "ABC"
-    print(localVar.someProperty) //ABC
-}
-
-someFunction(structInstace: someStructInstance)
-print(someStructInstance.someProperty) //Property
-</pre></code>
-
-15강 클로져 
+[12강 클로져](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect12.md)
 ===========
 1. 코드의 블럭으로 표현한 함수
 2. 일급시민이기에 변수, 상수, 매개변수로 사용 할 수 있다.
