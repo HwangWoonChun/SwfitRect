@@ -101,7 +101,7 @@ func returnOneClosure (first : @escaping VoidClosure, second : @escaping VoidClo
 </pre></code>
 
 <pre><code>
-//클로져를 외부함수에 저장힐때도 사용
+//클로져를 함수외부에 저장힐때도 사용
 
 var completionHandlers : [()->Void] = []
 
