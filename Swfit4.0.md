@@ -59,47 +59,8 @@ Swfit 4.0 Recture
 
 [15강 인스턴스 생성과 소멸](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect15.md)
 ===========
-1. 프로퍼티 초기화 : 프로퍼티는 초기화 해줘야하지만 필요 없다면 옵셔널을 사용 한다. 꼭 사용해야할 프로퍼티라면 암시적추출 옵셔널을 사용한다.
-
-2. init / deinit : 초기화 동시 메모리에 할당 / 소멸
-
-3. convereince init : 입맛대로 초기화 하고 싶다면 사용
-<pre><code>
-class Person {
-    var name = ""
-    var age  = 10
-    
-    init(name : String, age : Int) {
-        self.name = name
-        self.age  = age
-    }
-
-    convenience init(age : Int){
-        self.init(name : "hana", age : age)
-    }
-}
-
-var hana = Person(age: 10)
-print(hana.name)
-</pre></code>
-
-4. 실패가능한 이니셜라이즈 : init 함수에 ? 추가 하고 init 함수 내에 조건문을 걸어 nil값을 리턴
-<pre><code>
-class Person {
-    var name = ""
-    var age  = 10
-    
-    init?(name : String, age : Int) {
-        if (0...120).contains(age) == false{
-            return nil
-        }
-        self.name = name
-        self.age  = age
-    }
-}
-</pre></code>
-
-20강 옵셔널 체이닝
+* * *
+[16강 옵셔널 체이닝](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect16.md)
 ===========
 1. 옵셔널 체이닝 : 옵셔널 요소 내부의 프로퍼티로 또 다시 옵셔널이 연속적으로 연결되어 있는 경우 닐체크 하는 기법, 중간에 하나라도 닐이 있다면 닐 리턴
 <pre><code>
