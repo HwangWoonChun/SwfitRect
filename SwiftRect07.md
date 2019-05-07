@@ -49,3 +49,38 @@ if let tempName = myName, let tempName2 = myName2{
     function(myName: tempName, myName2: tempName2)
 }
 </pre></code>
+* * *
+5. 옵셔널 체이닝 : 옵셔널이 연속적으로 연결되어 있는 경우 닐 체크 하는 기법, 중간에 하나라도 nil 이 라면 nil 로 인스턴스 값 리턴
+<pre><code>
+class Person {
+    var home : Apartment?
+    var job  : String?
+}
+
+class Apartment{
+    var owner : Person?
+    var guardner : Person?
+}
+
+var apertment = Apartment()
+
+//아파트의 소유주는 가드너 인가?
+//옵셔널 체이닝 미사용
+if let aprtmentOwner = apertment.owner{
+    if let guardner = aprtmentOwner.home?.guardner{
+        print(guardner)
+    }
+}
+
+//옵셔널 체이닝 사용
+if let guardnersJob = apertment.owner?.home?.guardner{
+    print(guardnersJob)
+}
+</pre></code>
+* * *
+6. 닐 병합 연산자 : ?? 키워드로 닐 값이면 키워드 뒤에 값으로 채움
+<pre><code>
+if let guardnersJob = apertment.owner?.home?.guardner ?? "guardNer"{
+    print(guardnersJob)
+}
+</pre></code>
