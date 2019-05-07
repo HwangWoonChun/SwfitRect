@@ -77,87 +77,11 @@ Swfit 4.0 Recture
 ===========
 * * *
 
-25강 오류처리
+[20강 익스텐션](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect20.md)
 ===========
-1. 오류 표현 : 프로토콜이나 열거형으로 표현
+* * *
 
-2. throw, throws : 오류여지가 있는 함수는 throws 로 알려주고 throw 로 처리 한다.
-<pre><code>
-enum VendingMachineError : Error{
-    case invaildInput
-    case insufficientFunds(moneyNeed:Int) // 열거형의 연관값
-    case outOfStock
-}
-    
-class VendMachine {
-    let itemPrice : Int = 100
-    var itemCount : Int = 5
-    var deposite  : Int = 0
-        
-    func receiveMoney(money : Int) throws {
-        guard money > 0 else{
-            throw VendingMachineError.invaildInput
-        }
-        self.deposite += money
-    }
-}
-</pre></code>
-
-3. do-catch
-<pre><code>
-do {
-    try machine.receiveMoney(money: 10)
-}
-catch VendingMachineError.invaildInput{
-    print("입력 오류")
-}
-catch VendingMachineError.insufficientFunds(moneyNeed: _){
-    print("금액부족")
-}
-catch VendingMachineError.outOfStock{
-    print("수량부족")
-}
-</pre></code>
-
-4. do-catch with switch-case
-<pre><code>
-do {
-    try machine.receiveMoney(money: 300)
-}
-catch{ //캐치뒤에 (let error) 가 생략되어있음
-    switch error {
-    case VendingMachineError.invaildInput:
-        print("입력 오류")
-    case VendingMachineError.insufficientFunds(moneyNeed: _):
-        print("금액부족")
-    case VendingMachineError.outOfStock:
-        print("수량 부족")
-    default :
-        print("알수 없음")
-    }
-}
-</pre></code>
-
-5. 핸들링이 필요 없다면 오류 발생문 처리 하지 않아도 됨.
-<pre><code>
-do {
-    try machine.vend(numberofItem: 4)
-}
-catch {
-    print(error)
-}
-
-do {
-    try machine.vend(numberofItem: 4)
-}
-</pre></code>
-
-6. try?, try! : 오류가 발생하면 바로 닐값으로 리턴 하는 방식, ! 경우 정상동작 후 바로 값을 받지만 오류 발생시 종료
-<pre><code>
-result = try? machine.vend(numberofItem:4)
-</pre></code>
-
-26강 오류처리
+[21강 스위프트의 다양함 함수들](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect21.md)
 ===========
 1. map : 기존 데이터를 변형 하여 새로운 컨테이너 생성
 <pre><code>
