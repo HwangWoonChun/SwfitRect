@@ -4,8 +4,8 @@ Swfit 4.0 Recture
 15강 인스턴스 생성과 소멸
 ===========
 1. 프로퍼티 초기화 : 초기화가 필요없다면 옵셔널 / 암시적 추출 옵셔널, init, convenience init 함수를 사용하여 초기화 한다.
-
-* 이니셜라이즈
+* * *
+2. init 함수
 <pre><code>
 class Person{
     var name = "name"
@@ -26,8 +26,30 @@ class Person{
 
 let hwang = Person(age: "10", name: "hwang")
 </pre></code>
+* * *
+3. convenience init : 개발자 입맛대로 초기화
+<pre><code>
+class Person {
+    var name: String
+    var age: Int 
+    var gender: String
+    
+    init(name: String, age: Int, gender: String) {   
+        self.name = name
+        self.age = age
+        self.gender = gender
+    }
+    
+    convenience init(age: Int, gender: String) {
+        self.init(name: "hwang", age: age, gender: gender)
+    }
+    
+}
 
-* 초기값이 필요없고 꼭 인스턴스에 사용해야 할때 - 암시적 옵셔널 추출
+let hwang = Person(age: 10, gender: "man")
+</pre></code>
+* * *
+4. 초기값이 필요없고 꼭 인스턴스에 사용해야 할때 - 암시적 옵셔널 추출
 <pre><code>
 class Person{
     var name : String
@@ -42,8 +64,8 @@ class Person{
 
 let hwang = Person(age: "10", name: "hwang")
 </pre></code>
-
-* 실패 가능한 이니셜라이즈 : init?
+* * *
+5. 실패 가능한 이니셜라이즈 : init?
 <pre><code>
 class Person{
     var name : String
@@ -64,5 +86,5 @@ class Person{
 
 let hwang : Person? = Person(age: "10", name: "hwang")
 </pre></code>
-
-* 인스턴스가 메모리에서 해제되는 시점에 호출 : deinit
+* * *
+6. 인스턴스가 메모리에서 해제되는 시점에 호출 : deinit
