@@ -63,63 +63,9 @@ Swfit 4.0 Recture
 
 [16강 타입 캐스팅](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect16.md)
 ===========
-1. 타입 캐스팅 : 인스턴스의 타입을 확인할 때 쓰인다.(특히 딕셔너리에선 Any, AnyObject를 많이 사용하기 때문에 많이 사용된다.) is 키워드 사용
-<pre><code>
-class Person {
-}
+* * *
 
-class Student: Person {
-}
-
-class UniversityStudent: Student {
-}
-
-var hana    = Person()
-var jason   = Student()
-var key     = UniversityStudent()
-
-if hana is Person {
-    print("hana 는 Person 클래스")
-}
-</pre></code>
-
-2. 기존의 타입캐스팅은 스위프트에선 지원하지 않는다. 새로운 타입으로 변수를 변경하고자 할때 엄격한 타입지정으로 인해 새로운 객체를 생성하여 넘겨주는 방법 밖에 없다.
- 
-3. 업캐스팅 : as 를 사용하여 부모 클래스의 인스턴스로 사용 할 수 있는지 채크한다.
-<pre><code>
-class Person {
-}
-
-class Student: Person {
-}
-
-class UniversityStudent: Student {
-}
-
-//하나는 스트던트 인데 Person 클래스로 사용할 수 있는가 없다면 에러 반환
-var hana    = Student() as Person
-</pre></code>
-
-4. 다운 캐스팅 : as?, as! 를 사용하여 자식클래스의 인스턴스로 사용 할 수 있는지 체크한다.
-<pre><code>
-class Person {
-}
-
-class Student: Person {
-}
-
-class UniversityStudent: Student {
-}
-
-var hana    = Person()
-var jenny   = Student()
-var jina    = UniversityStudent()
-
-print(hana as? Student) //다운캐스팅 nil : Person클래스가 아닌 Student 로 쓸래?
-print(hana as! Student) //다운캐스팅 컴파일 에러 : Person클래스가 아닌 Student 로 써!
-</pre></code>
-
-22강 assert, guard
+[17강 assert, guard](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect17.md)
 ===========
 1. assert 함수 : 디버깅모드에서만 가능한 조건의 검증을 위해 사용되는 함수 조건에 맞지 않다면 동작 중지 후 메세지를 띄어준다. 메세지가 없다면 띄우지 않음
 
