@@ -11,7 +11,7 @@ class Person{
     var name = "name"
     var age : String  //error : Class 'Person' has no initializers
 }
-</pre><code>
+</pre></code>
 
 <pre><code>
 class Person{
