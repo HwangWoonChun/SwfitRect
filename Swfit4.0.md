@@ -77,7 +77,7 @@ Swfit 4.0 Recture
 ===========
 * * *
 
-[20강 익스텐션](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect20.md)
+[20강 ](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect20.md)
 ===========
 * * *
 
