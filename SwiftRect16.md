@@ -40,8 +40,10 @@ class Person : Universe{
 var hwang = Person() as Universe
 
 //hwang2,3은 universe 클래스 이지만 Person 로 사용 가능
+
 //2는 부모클래스이지만 자식으로 쓸 수 있어?
 var hwang2 = Universe() as? Person  //nil
+
 //3은 부모클래스이지만 자식으로 쓸 수 있어야해!
 var hwang3 = Universe() as! Person  //Could not cast value of type '__lldb_expr_63.Universe' (0x1245d5090) to '__lldb_expr_63.Person' (0x1245d5120).
 </pre></code>
