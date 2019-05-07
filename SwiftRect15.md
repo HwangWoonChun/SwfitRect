@@ -65,7 +65,7 @@ class Person{
 let hwang = Person(age: "10", name: "hwang")
 </pre></code>
 * * *
-5. 실패 가능한 이니셜라이즈 : init?
+5. 실패 가능한 이니셜라이즈 : init? , 조건문을 넣어 인스턴스를 nil로 만들어줄 수 있다.
 <pre><code>
 class Person{
     var name : String
