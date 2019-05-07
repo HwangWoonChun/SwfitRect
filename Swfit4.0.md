@@ -67,19 +67,9 @@ Swfit 4.0 Recture
 
 [17강 assert, guard](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect17.md)
 ===========
-1. assert 함수 : 디버깅모드에서만 가능한 조건의 검증을 위해 사용되는 함수 조건에 맞지 않다면 동작 중지 후 메세지를 띄어준다. 메세지가 없다면 띄우지 않음
+* * *
 
-2. guard 구문 : 디버깅, 배포모드 둘다 가능한며 return, break 문을 통해 빠른 실행 및 종료가 가능한 검증 구문
-<pre><code>
-func someFunction (info : [String : Any]){
-    guard let name = info["name"] as? String else{
-        return
-    }
-    print(name)
-}
-</pre></code>
-
-23강 프로토콜
+[18강 프로토콜](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect18.md)
 ===========
 1. 프로토콜 : 특정 역할을 수행하기위한 메서드, 프로퍼티, 이니셜라이즈 등의 요구사항을 정의, 구조체, 열거, 클래스에서 실제 구현
 
