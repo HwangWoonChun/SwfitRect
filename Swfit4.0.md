@@ -61,51 +61,7 @@ Swfit 4.0 Recture
 ===========
 * * *
 
-[16강 옵셔널 체이닝](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect16.md)
-===========
-1. 옵셔널 체이닝 : 옵셔널 요소 내부의 프로퍼티로 또 다시 옵셔널이 연속적으로 연결되어 있는 경우 닐체크 하는 기법, 중간에 하나라도 닐이 있다면 닐 리턴
-<pre><code>
-class Person {
-    var home : Apartment?
-    var job  : String?
-}
-
-class Apartment{
-    var owner : Person?
-    var guardner : Person?
-}
-
-var apertment = Apartment()
-
-//아파트의 소유주는 가드너 일까?
-if let guardnerJob = apertment.owner?.home?.guardner?.job {
-    print("맞음 \(guardnerJob)")
-}else{
-    print("아님")
-}
-</pre></code>
-
-2. 닐병합 연산자 : ?? 키워드로 닐값이면 ?? 뒤에 값을 사용
-<pre><code>
-class Person {
-    var home : Apartment?
-    var job  : String?
-}
-
-class Apartment{
-    var owner : Person?
-    var guardner : Person?
-}
-
-var apertment = Apartment()
-
-//아파트의 소유주는 가드너 일까?
-if let guardnerJob = apertment.owner?.home?.guardner?.job ?? "GuradNer"{
-    print("맞음 \(guardnerJob)")
-}
-</pre></code>
-
-21강 티입 캐스팅
+[16강 타입 캐스팅](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect16.md)
 ===========
 1. 타입 캐스팅 : 인스턴스의 타입을 확인할 때 쓰인다.(특히 딕셔너리에선 Any, AnyObject를 많이 사용하기 때문에 많이 사용된다.) is 키워드 사용
 <pre><code>
