@@ -42,3 +42,19 @@ if let mon = WeekDay(rawValue: 0){
 </pre></code>
 * * *
 4. 열거형 내부에 함수 추가 가능
+* * *
+5. 연관값 : 케이스에 추가적인 정보를 덧붙일 수 있는 기법
+<pre><code>
+enum Trade {
+    case Buy(stock : Int, amount : Int)
+    case Sell(stock : Int, amount : Int)
+}
+//func trade(type : Trade){}
+
+let trade = Trade.Buy(stock: 10, amount: 20)
+
+//구매 타입은 구입인데 주식과 수량이 이정도야 라고 알려주는 것
+if case let Trade.Buy(stock, amount) = trade{
+    print(stock, amount)
+}
+</pre></code>
