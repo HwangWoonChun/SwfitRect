@@ -29,7 +29,7 @@ struct Student{
     var koreanAge = 0
 }
 </pre></code>
-4. 연산 프로퍼티
+4. 연산 프로퍼티 : 읽기 전용만은(get) 가능하지만, 쓰기(set)전용으로만 불가능하다.
 <pre><code>
 struct Student{
     //저장 프로퍼티
