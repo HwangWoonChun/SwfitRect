@@ -83,31 +83,7 @@ Swfit 4.0 Recture
 
 [21강 스위프트의 다양함 함수들](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect21.md)
 ===========
-1. map : 기존 데이터를 변형 하여 새로운 컨테이너 생성
-<pre><code>
-var doubleNumbers = numbers.map { (number : Int) -> Int in
-    return number * 2
-}
-
-var doubleNumbers = numbers.map{$0 * 2}
-</pre></code>
-
-2. filter : 내부 값을 걸러 새로운 컨테이너로 추출, 조건문에 부합되는 값만 추출
-<pre><code>
-var evenNumbers = numbers.filter { (number) -> Bool in
-    return number % 2 == 0
-}
-evenNumbers = numbers.filter{$0 % 2 == 0}
-</pre></code>
-
-3. reduce : 하나로 통합, 매개변수 첫번째는 초기값
-<pre><code>
-let sum = numbers.reduce(0, { (first : Int, second : Int) -> Int in
-    return first + second
-})
-
-let sumFromThree = numbers.reduce(3){$0 + $1}
-</pre></code>
+* * *
 
 27강 ARC
 ===========
