@@ -71,115 +71,11 @@ Swfit 4.0 Recture
 
 [18강 프로토콜](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect18.md)
 ===========
-1. 프로토콜 : 특정 역할을 수행하기위한 메서드, 프로퍼티, 이니셜라이즈 등의 요구사항을 정의, 구조체, 열거, 클래스에서 실제 구현
+* * *
 
-2. 읽기 쓰기 / 읽기 전용 프로퍼티 요구는 연산프로퍼티로 대체 가능
-
-<pre><code>
-protocol Talkable{
-    //읽기, 쓰기 모두 가능
-    var topic : String {get set}
-    //읽기 만 가능
-    var language : String {get}
-    func talk()
-    init(topic : String, language : String)
-}
-
-struct Person : Talkable{
-    var language: String{
-        get {
-            return ("\(self.language) 언어이다.")
-        }
-        set{
-            self.language = newValue
-        }
-    }
-    var topic: String
-    
-    init(topic: String, language: String) {
-        self.topic      = topic
-        self.language   = language
-    }
-    
-    func talk() {
-        
-    }
-}
-</pre></code>
-
-3. 프로토콜은 다중상속이 가능하다. 부모클래스가 있다면 첫번쨰 란에 추가해주고 프로토콜 준수를 알려준다. 추가적으로 다운 캐스팅을 통해 해당 프로토콜을 준수하는지 체크 할 수 있다.
-<pre><code>
-protocol Readable{
-    func read()
-}
-protocol Writeable{
-    func write()
-}
-protocol ReadSpeakable : Readable {
-    //func read()
-    func speak()
-}
-
-protocol ReadWriteSpeakable : Readable,Writeable {
-    //func read()
-    //func write()
-    func speak()
-}
-
-struct SomeType : ReadWriteSpeakable{
-    func read() {
-        
-    }
-    func write() {
-        
-    }
-    func speak() {
-        
-    }
-}
-
-let sometype = SomeType()
-
-//is 를 통한 타입 확인
-print(sometype is Readable) //true
-
-//다운캐스팅을 통한 체크
-if let some = sometype as? Readable{
-    print(some)
-}else{
-    print("someType 은 Readable을 따르지 않는다.")
-}
-</pre></code>
-
-24강 Extension
+[19강 익스텐션](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect19.md)
 ===========
-1. 구조체, 열거형, 클래스, 프로토콜 타입에 새로운 기능을 추가할 수 있는 기능
-<pre><code>
-extension 타입 : 프로토콜{
-}
-</pre></code>
-
-2. 확장 가능 > 연산 타입 프로퍼티, 연산 인스턴스 프로퍼티, 타입 메소드, 인스턴스 메소드, 이니셜라이즈, 서브스크립트, 중첩타입
-<pre><code>
-extension Int {
-    var isEven : Bool {
-        return self % 2 == 0
-    }
-    func multiPly(by n : Int) -> Int {
-        return n * self
-    }
-}
-
-7.isEven
-7.multiPly(by: 3)
-</pre></code>
-
-3. 프로토콜의 경우 준수 기준을 추가 할 수 있다.
-
-4. 프로토콜 지향 언어에서 익스텐션이 중요한이유
-* 상속이 되지 않는 구조체, 열거형 등에 다양한 공통 기능을 가질 수 있는 것은 프로토콜과 익스텐션 때문이다.
-* 클래스는 참조 타입임으로 참조 추적에 대한 비용이 발생한다. 그렇다고 값 타입을 사용하고 싶어도 기능을 매번 새로 추가 해줘야 했지만 프로토콜을 통해 한계를 없앰
-* 프로토콜을 통해 프로토콜 단위로 묶어 표현하고 초기 구현 할 수 있어 상속이 가지고 있는 다중상속의 한계를 탈피
+* * *
 
 25강 오류처리
 ===========
