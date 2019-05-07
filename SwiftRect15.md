@@ -88,3 +88,28 @@ let hwang : Person? = Person(age: "10", name: "hwang")
 </pre></code>
 * * *
 6. 인스턴스가 메모리에서 해제되는 시점에 호출 : deinit
+<pre><code>
+class PersonE {
+    var name: String
+    var pet: Puppy?
+    var child: PersonC
+    
+    init(name: String, child: PersonC) {
+        self.name = name
+        self.child = child
+    }
+    
+    // 인스턴스가 메모리에서 해제되는 시점에 자동 호출
+    deinit {
+        if let petName = pet?.name {
+            print("\(name)가 \(child.name)에게 \(petName)를 인도합니다")
+            self.pet?.owner = child
+        }
+    }
+}
+
+var donald: PersonE? = PersonE(name: "donald", child: jenny)
+donald?.pet = happy
+donald = nil // donald 인스턴스가 더이상 필요없으므로 메모리에서 해제됩니다
+// donald가 jenny에게 happy를 인도합니다
+</pre></code>
