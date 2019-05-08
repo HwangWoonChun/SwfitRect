@@ -81,3 +81,114 @@ room?.person = nil      // Person 참조횟수 : 1
 hwang = nil             // Person 참조횟수 : 0, Person deinit
 room  = nil             // Room 참조횟수 : 0, Room deinit
 </pre></code>
+* * *
+5. 참조 횟수를 늘리지 않고 참조 하는 방법 : Weak / 메모리 해제시 자동으로 nil을 할당, 참조되는 동안 메모리에서 절대 해제 될 가능성이 있다면 사용
+* nil 이 자동으로 할당 됨으로 무조건 옵셔널 타입을 사용 해야한다.
+<pre><code>
+class Person {
+    
+    var name : String
+    var room : Room?
+    
+    init(name : String) {
+        self.name = name
+        print("Person initailized")
+    }
+    deinit {
+        print("Person deinit")
+    }
+}
+
+class Room {
+    
+    var number : String
+    weak var person : Person?
+    
+    init(number : String) {
+        self.number = number
+        print("Room initailized")
+    }
+    deinit {
+        print("Room deinit")
+    }
+}
+
+var hwang : Person? = Person(name: "hwang") // 참조횟수 : 1, Person initailized 호출
+var room  : Room? = Room(number: "10")      // 참조횟수 : 1, Room initailized 호출
+
+hwang?.room = room      // Room 참조횟수 : 1
+room?.person = hwang    // Person 참조횟수 : 2
+
+room  = nil             // Room 참조횟수 : 0
+hwang = nil             // Person 참조횟수 : 0, Person deinit, Room deinit
+print(room?.person)     // nil
+</pre></code>
+* * *
+5. 참조 횟수를 늘리지 않고 참조 하는 방법 : Unowned / 메모리 해제시 자동으로 nil이 되지 않음, 참조되는 동안 메모리에서 절대 해제 될 가능성이 없다면 사용 
+* nil 이 자동으로 할당 되지 않을 수도 있음으로 옵셔널은 선택사항이다.
+<pre><code>
+class Person {
+    
+    var name : String
+    var room : Room?
+    
+    init(name : String) {
+        self.name = name
+        print("Person initailized")
+    }
+    deinit {
+        print("Person deinit")
+    }
+}
+
+class Room {
+    
+    var number : String
+    unowned var person : Person?
+    
+    init(number : String) {
+        self.number = number
+        print("Room initailized")
+    }
+    deinit {
+        print("Room deinit")
+    }
+}
+
+var hwang : Person? = Person(name: "hwang") // 참조횟수 : 1, Person initailized 호출
+var room  : Room? = Room(number: "10")      // 참조횟수 : 1, Room initailized 호출
+
+hwang?.room = room      // Room 참조횟수 : 1
+room?.person = hwang    // Person 참조횟수 : 2
+
+room  = nil             // Room 참조횟수 : 0
+hwang = nil             // Person 참조횟수 : 0, Person deinit, Room deinit
+
+print(room?.person?.name)     // nil
+</pre></code>
+* * *
+6. 클로져의 강한 참조 순환
+<pre><code>
+class Person {
+    var name  : String
+    var hobby : String?
+    
+    //lazy 클로져 내부에서 self 사용가능
+    lazy var introduce : (() -> String) = {
+        var introduction : String = "hello my name is \(self.name)"
+        return introduction
+    }
+    
+    init (name : String, hobby : String? = nil){
+        self.name   = name
+        self.hobby  = hobby
+    }
+    deinit {
+        print("deinit")
+    }
+}
+
+var a : Person? = Person(name: "hwang", hobby: "develop")
+a?.introduce    //클로져가 언제든지 self.name 을 사용 할 수 있도록 참조 횟수 증가 시킴
+a = nil         //deinit 안 불림
+</pre></code>
