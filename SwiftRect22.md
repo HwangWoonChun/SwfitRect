@@ -168,6 +168,7 @@ print(room?.person?.name)     // nil
 </pre></code>
 * * *
 6. 클로져의 강한 참조 순환
+* 클로져는 자신이 호출 되면 언제든지 자신내부의 참조들을 사용 할 수 있도록 참조횟수를 증가시켜 메모리 헤제되는 것을 방지하는데 이때 자신을 프로퍼티로 갖는 인스턴스의 참조 횟수도 증가
 <pre><code>
 class Person {
     var name  : String
@@ -193,7 +194,7 @@ a?.introduce    //클로져가 언제든지 self.name 을 사용 할 수 있도�
 a = nil         //deinit 안 불림
 </pre></code>
 
-7. 캡쳐 리스트를 이용한 해결방법
+7. 캡쳐 리스트를 이용한 해결방법 : 클로져내부에서 참조 타입을 획득하는 규칙 제시하는 기능
 * [캡쳐리스트 참조방식] in{}
 <pre><code>
 class Person {
