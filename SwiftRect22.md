@@ -192,3 +192,30 @@ var a : Person? = Person(name: "hwang", hobby: "develop")
 a?.introduce    //클로져가 언제든지 self.name 을 사용 할 수 있도록 참조 횟수 증가 시킴
 a = nil         //deinit 안 불림
 </pre></code>
+
+7. 캡쳐 리스트를 이용한 해결방법
+* [캡쳐리스트 참조방식] in{}
+<pre><code>
+class Person {
+    var name  : String?
+    var hobby : String?
+    
+    //lazy 클로져 내부에서 self 사용가능
+    lazy var introduce : (() -> String) = {[unowned self] in    //unowned 타입의 self를 캡쳐 리스트에 추가
+        var introduction : String = "hello my name is \(self.name!)"
+        return introduction
+    }
+    
+    init (name : String, hobby : String? = nil){
+        self.name   = name
+        self.hobby  = hobby
+    }
+    deinit {
+        print("deinit")
+    }
+}
+
+var a : Person? = Person(name: "hwang", hobby: "develop")
+print(a?.introduce)    //클로져가 언제든지 self.name 을 사용 할 수 있도록 참조 횟수 증가 시킴
+a = nil         //deinit
+</pre></code>
