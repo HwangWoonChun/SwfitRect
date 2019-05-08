@@ -96,7 +96,7 @@ Swfit 4.0 Recture
 제너릭을 사용하고자 하는 이름 <타입 : 매개변수>
 제너릭을 사용하고자 하는 이름 <타입 : 매개변수> (함수의 매개변수)
 </pre></code>
-
+ 
 2. 제너릭을 사용하지 않은 swap 함수 : Int 형만 가능
 //Inout은 함수에서 직접 파라미터로 변수의 주소값을 넘겨 직접 접근할 수 있도록 해주는 기능
 func swapTwoInts( a : inout Int, b : inout Int){
