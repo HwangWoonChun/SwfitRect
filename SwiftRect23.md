@@ -11,7 +11,7 @@ Swfit 4.0 Recture
 * * *
 2. 타입 수용의 한계 : 기본적인 스위프트는 폐쇄적인 타입 처리로 지정된 매개변수 타입, 자료구조만 처리
 <pre><code>
-
+func swapTwoInts(a : inout Int, b : inout Int){
     let tempA = a
     a = b
     b = tempA
