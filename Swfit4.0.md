@@ -89,5 +89,5 @@ Swfit 4.0 Recture
 ===========
 * * *
 
-[23강 제너릭](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect22.md)
+[23강 제너릭](https://github.com/HwangWoonChun/SwfitRect/blob/master/SwiftRect23.md)
 ===========
