@@ -21,10 +21,10 @@ var numberOne = 5
 var numberTwo = 10
 
 swapTwoInts(a: &numberOne, b: &numberTwo)
-```swift
+```
 * * *
 3. 제너릭 함수로 한계 해결
-<pre><code>
+```swift
 func swapTwoInts<T>(a : inout T, b : inout T){
     let tempA = a
     a = b
@@ -39,10 +39,10 @@ var stringTwo = "b"
 
 swapTwoInts(a: &numberOne, b: &numberTwo)
 swapTwoInts(a: &stringOne, b: &stringTwo)
-</pre></code>
+```
 * * *
 3. 제너릭 타입의 한계
-<pre><code>
+```swift
 struct IntStack {
     var items = [Int]()
     
@@ -53,10 +53,10 @@ struct IntStack {
         items.removeLast()
     }
 }
-</pre></code>
+```
 * * *
 4. 제너릭 타입의 한계 해결
-<pre><code>
+```swift
 struct Stack <Element>{
     var items = [Element]()
     
@@ -70,14 +70,13 @@ struct Stack <Element>{
 
 var doubles : Stack<Double> = Stack<Double>()
 var anys    = Stack<Any>()
-</pre></code>
-* * *
+```
 5. Any vs 재너릭 타입 : 애니타입의 경우 콜랙션 타입이 어떤 데이터든 수용 하는 것을 말하며, 재너릭타입은 콜랙션 타입이 어떤 데이터든 수용 하지만 수용된 데이터들이 일관적으로 동작하길 바랄때 사용 한다
 * any : [1,"2",3,"4"]
 * 재너릭 : [1,2,3,4] or ["1","2","3","4"]
 * * *
 6. 제너릭 확장 : 재너릭 타입 인자 매개변수 명시하면 안된다.
-<pre><code>
+```swift
 struct Stack <Element>{
     var items = [Element]()
     
@@ -94,16 +93,15 @@ extension Stack {   //재너릭 타입 인자 매개변수 명시하면 안된�
         return self.items.last
     }
 }
-</pre></code>
-* * *
+```
 7. 제너릭 타입 제약 : 클래스타입, 프로토콜에 가능
-<pre><code>
+```swift
 //딕셔너리 where 절을 통해 key를 해쉬에이블 한 프로토콜 준수 제약
 public struct Dictionary<Key, Value> where Key : Hashable {}
-</pre></code>
+```
 * * *
 8. 프로토콜 연관타입 : 어떤 타입이 매개변수 인지 모르지만 여기에 쓰일거다 라고 표현 === 제너릭과 유사한 프로토콜의 기능
-<pre><code>
+```swift
 protocol Container {
     associatedtype ItemType
     var count : Int {get}
@@ -159,4 +157,4 @@ struct IntStack : Container{
         return items[i]
     }
 }
-</pre></code>
+```
